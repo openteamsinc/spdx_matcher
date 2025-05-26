@@ -613,3 +613,360 @@ met:
     
     # This should fail because "1." doesn't match "*"
     assert result is None
+
+
+def test_strip_matches_with_optional_elements():
+    """Test strip_matches function with optional elements."""
+    from spdx_matcher.strip_matches import strip_matches
+    
+    # Create a license XML with optional elements similar to OLFL-1.3.xml
+    xml_string = """<SPDXLicenseCollection xmlns="http://www.spdx.org/license">
+        <license licenseId="TEST-1.0" name="Test License">
+            <text>
+                <titleText>
+                    <p>Test License</p>
+                </titleText>
+                <optional>
+                    <p>TERMS AND CONDITIONS FOR USE</p>
+                </optional>
+                <p>Permission is hereby granted to use this software.</p>
+                <optional>
+                    <p>END OF TERMS AND CONDITIONS</p>
+                </optional>
+            </text>
+        </license>
+    </SPDXLicenseCollection>"""
+    
+    root = ET.fromstring(xml_string)
+    
+    # Test 1: License text with all optional elements present
+    license_text_with_optional = """Test License
+
+TERMS AND CONDITIONS FOR USE
+
+Permission is hereby granted to use this software.
+
+END OF TERMS AND CONDITIONS
+
+Some remaining text here.
+"""
+    
+    result1 = strip_matches(root, license_text_with_optional)
+    assert result1 is not None
+    assert "some remaining text here" in result1.lower()
+    assert "test license" not in result1.lower()
+    assert "terms and conditions" not in result1.lower()
+    assert "permission is hereby granted" not in result1.lower()
+    assert "end of terms" not in result1.lower()
+    
+    # Test 2: License text with some optional elements missing (should still pass)
+    license_text_partial_optional = """Test License
+
+Permission is hereby granted to use this software.
+
+END OF TERMS AND CONDITIONS
+
+Some remaining text here.
+"""
+    
+    result2 = strip_matches(root, license_text_partial_optional)
+    assert result2 is not None
+    assert "some remaining text here" in result2.lower()
+    assert "test license" not in result2.lower()
+    assert "permission is hereby granted" not in result2.lower()
+    assert "end of terms" not in result2.lower()
+    
+    # Test 3: License text with no optional elements (should still pass)
+    license_text_no_optional = """Test License
+
+Permission is hereby granted to use this software.
+
+Some remaining text here.
+"""
+    
+    result3 = strip_matches(root, license_text_no_optional)
+    assert result3 is not None
+    assert "some remaining text here" in result3.lower()
+    assert "test license" not in result3.lower()
+    assert "permission is hereby granted" not in result3.lower()
+    
+    # Test 4: License text missing required elements (should fail)
+    license_text_missing_required = """Test License
+
+TERMS AND CONDITIONS FOR USE
+
+Some text that doesn't match the required paragraph.
+
+END OF TERMS AND CONDITIONS
+"""
+    
+    result4 = strip_matches(root, license_text_missing_required)
+    assert result4 is None  # Should fail because required paragraph is missing
+
+
+def test_strip_matches_optional_with_nested_elements():
+    """Test strip_matches with optional elements containing lists."""
+    from spdx_matcher.strip_matches import strip_matches
+    
+    # Create XML with optional element containing a list
+    xml_string = """<SPDXLicenseCollection xmlns="http://www.spdx.org/license">
+        <license licenseId="TEST-2.0" name="Test License with List">
+            <text>
+                <titleText>
+                    <p>Test License with Lists</p>
+                </titleText>
+                <optional>
+                    <list>
+                        <item>
+                            <bullet>1.</bullet>
+                            First optional condition
+                        </item>
+                        <item>
+                            <bullet>2.</bullet>
+                            Second optional condition
+                        </item>
+                    </list>
+                </optional>
+                <p>The software is provided as-is.</p>
+            </text>
+        </license>
+    </SPDXLicenseCollection>"""
+    
+    root = ET.fromstring(xml_string)
+    
+    # Test with optional list present
+    license_text_with_list = """Test License with Lists
+
+1. First optional condition
+2. Second optional condition
+
+The software is provided as-is.
+
+Additional text.
+"""
+    
+    result1 = strip_matches(root, license_text_with_list)
+    assert result1 is not None
+    assert "additional text" in result1.lower()
+    assert "first optional condition" not in result1.lower()
+    assert "second optional condition" not in result1.lower()
+    assert "the software is provided as-is" not in result1.lower()
+    
+    # Test without optional list (should still pass)
+    license_text_no_list = """Test License with Lists
+
+The software is provided as-is.
+
+Additional text.
+"""
+    
+    result2 = strip_matches(root, license_text_no_list)
+    assert result2 is not None
+    assert "additional text" in result2.lower()
+    assert "the software is provided as-is" not in result2.lower()
+
+
+def test_strip_matches_with_implicit_text():
+    """Test strip_matches with implicit text content (like mpi-permissive.xml)."""
+    from spdx_matcher.strip_matches import strip_matches
+    
+    # Create XML similar to mpi-permissive.xml with implicit text content
+    xml_string = """<SPDXLicenseCollection xmlns="http://www.spdx.org/license">
+        <license licenseId="mpi-permissive" name="mpi Permissive License">
+            <text>
+                <copyrightText>
+                    <p>Copyright (C) 2000-2004 by Etnus, LLC</p>
+                </copyrightText>
+
+  Permission is hereby granted to use, reproduce, prepare derivative
+  works, and to redistribute to others.
+
+					  DISCLAIMER
+
+  Neither Etnus, nor any of their employees, makes any warranty
+  express or implied, or assumes any legal liability or
+  responsibility for the accuracy, completeness, or usefulness of any
+  information, apparatus, product, or process disclosed, or
+  represents that its use would not infringe privately owned rights.
+
+  This code was written by
+  James Cownie: Etnus, LLC.
+            </text>
+        </license>
+    </SPDXLicenseCollection>"""
+    
+    root = ET.fromstring(xml_string)
+    
+    # Test license text that matches the implicit content
+    license_text = """Copyright (C) 2000-2004 by Etnus, LLC
+
+Permission is hereby granted to use, reproduce, prepare derivative
+works, and to redistribute to others.
+
+                      DISCLAIMER
+
+Neither Etnus, nor any of their employees, makes any warranty
+express or implied, or assumes any legal liability or
+responsibility for the accuracy, completeness, or usefulness of any
+information, apparatus, product, or process disclosed, or
+represents that its use would not infringe privately owned rights.
+
+This code was written by
+James Cownie: Etnus, LLC.
+
+Some additional remaining text.
+"""
+    
+    result = strip_matches(root, license_text)
+    assert result is not None
+    assert "some additional remaining text" in result.lower()
+    # All the license content should be removed
+    assert "permission is hereby granted" not in result.lower()
+    assert "disclaimer" not in result.lower()
+    assert "etnus" not in result.lower()
+    assert "james cownie" not in result.lower()
+
+
+def test_strip_matches_with_mixed_implicit_and_explicit_elements():
+    """Test strip_matches with both implicit text and explicit elements."""
+    from spdx_matcher.strip_matches import strip_matches
+    
+    # Create XML with implicit text mixed with explicit elements
+    xml_string = """<SPDXLicenseCollection xmlns="http://www.spdx.org/license">
+        <license licenseId="MIXED-1.0" name="Mixed License">
+            <text>
+                <titleText>
+                    <p>Mixed License</p>
+                </titleText>
+
+Some implicit license text here.
+
+                <p>This is an explicit paragraph.</p>
+
+More implicit text after the paragraph.
+
+                <optional>
+                    <p>Optional terms may apply.</p>
+                </optional>
+
+Final implicit text at the end.
+            </text>
+        </license>
+    </SPDXLicenseCollection>"""
+    
+    root = ET.fromstring(xml_string)
+    
+    # Test with all content present
+    license_text = """Mixed License
+
+Some implicit license text here.
+
+This is an explicit paragraph.
+
+More implicit text after the paragraph.
+
+Optional terms may apply.
+
+Final implicit text at the end.
+
+Remaining text.
+"""
+    
+    result = strip_matches(root, license_text)
+    assert result is not None
+    assert "remaining text" in result.lower()
+    assert "mixed license" not in result.lower()
+    assert "some implicit license text" not in result.lower()
+    assert "explicit paragraph" not in result.lower()
+    assert "more implicit text" not in result.lower()
+    assert "optional terms" not in result.lower()
+    assert "final implicit text" not in result.lower()
+
+
+def test_strip_matches_with_alt_elements():
+    """Test strip_matches with top-level alt elements (like Multics.xml)."""
+    from spdx_matcher.strip_matches import strip_matches
+    
+    # Create XML similar to Multics.xml with top-level alt elements
+    xml_string = """<SPDXLicenseCollection xmlns="http://www.spdx.org/license">
+        <license licenseId="Multics" name="Multics License">
+            <text>
+                <titleText>
+                    <p>Multics License</p>
+                </titleText>
+                <optional>
+                    <p>Historical Background</p>
+                </optional>
+                <optional>
+                    <p>.</p>
+                </optional>
+                <alt match="-*" name="divider">
+                -----------------------------------------------------------
+                </alt>
+                <p>Permission is hereby granted to use this software.</p>
+            </text>
+        </license>
+    </SPDXLicenseCollection>"""
+    
+    root = ET.fromstring(xml_string)
+    
+    # Test with alt element present (using dashes)
+    license_text_with_alt = """Multics License
+
+Historical Background
+
+.
+
+-----------------------------------------------------------
+
+Permission is hereby granted to use this software.
+
+Remaining text.
+"""
+    
+    result1 = strip_matches(root, license_text_with_alt)
+    assert result1 is not None
+    assert "remaining text" in result1.lower()
+    assert "multics license" not in result1.lower()
+    assert "historical background" not in result1.lower()
+    assert "---" not in result1
+    assert "permission is hereby granted" not in result1.lower()
+    
+    # Test with alt element using different pattern (should also match due to alt match pattern)
+    license_text_alt_variation = """Multics License
+
+Historical Background
+
+.
+
+---------
+
+Permission is hereby granted to use this software.
+
+Remaining text.
+"""
+    
+    result2 = strip_matches(root, license_text_alt_variation)
+    assert result2 is not None
+    assert "remaining text" in result2.lower()
+    assert "multics license" not in result2.lower()
+    assert "historical background" not in result2.lower()
+    assert "---------" not in result2
+    assert "permission is hereby granted" not in result2.lower()
+    
+    # Test without optional elements but with alt element
+    license_text_minimal = """Multics License
+
+-----------------------------------------------------------
+
+Permission is hereby granted to use this software.
+
+Remaining text.
+"""
+    
+    result3 = strip_matches(root, license_text_minimal)
+    assert result3 is not None
+    assert "remaining text" in result3.lower()
+    assert "multics license" not in result3.lower()
+    assert "---" not in result3
+    assert "permission is hereby granted" not in result3.lower()
