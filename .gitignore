@@ -1,1 +1,5 @@
 venv10/
+.egg-info
+__pycache__
+build/
+spdx_matcher/licenses/*.xml
