@@ -95,7 +95,13 @@ def match_list_item(item_elem: ET.Element, license_text: str) -> Optional[str]:
             # For alt elements, wrap the pattern in parentheses
             alt_pattern = child.get("match", "")
             if alt_pattern:
-                pattern_parts.append(f"({alt_pattern})")
+                # Fix patterns that use * quantifier which can match empty strings
+                # Convert patterns like "-*" to "-+" to require at least one occurrence
+                if alt_pattern.endswith("*") and not alt_pattern.endswith("+*") and not alt_pattern.endswith(".*"):
+                    fixed_pattern = alt_pattern[:-1] + "+"
+                    pattern_parts.append(f"({fixed_pattern})")
+                else:
+                    pattern_parts.append(f"({alt_pattern})")
             else:
                 # Use the element text if no match pattern
                 alt_text = normalize(child.text or "")
@@ -288,7 +294,13 @@ def match_p(p_elem: ET.Element, license_text: str) -> Optional[str]:
             # For alt elements, wrap the pattern in parentheses
             alt_pattern = child.get("match", "")
             if alt_pattern:
-                pattern_parts.append(f"({alt_pattern})")
+                # Fix patterns that use * quantifier which can match empty strings
+                # Convert patterns like "-*" to "-+" to require at least one occurrence
+                if alt_pattern.endswith("*") and not alt_pattern.endswith("+*") and not alt_pattern.endswith(".*"):
+                    fixed_pattern = alt_pattern[:-1] + "+"
+                    pattern_parts.append(f"({fixed_pattern})")
+                else:
+                    pattern_parts.append(f"({alt_pattern})")
             else:
                 # Use the element text if no match pattern
                 alt_text = normalize(child.text or "")
@@ -319,7 +331,13 @@ def match_p(p_elem: ET.Element, license_text: str) -> Optional[str]:
         flexible_part = part.replace(r"\ ", r"\s+")
         pattern_with_flexible_space.append(flexible_part)
 
-    full_pattern = r"\s*".join(pattern_with_flexible_space)
+    # Join pattern parts with flexible whitespace matching, but avoid adding \s* after patterns that might match empty strings
+    if len(pattern_with_flexible_space) == 1:
+        # Single pattern part - don't add trailing \s*
+        full_pattern = pattern_with_flexible_space[0]
+    else:
+        # Multiple parts - join with \s* between them
+        full_pattern = r"\s*".join(pattern_with_flexible_space)
     print(f"Pattern: {repr(full_pattern)}")
     print(f"Text to match: {repr(license_text[:100])}")
 

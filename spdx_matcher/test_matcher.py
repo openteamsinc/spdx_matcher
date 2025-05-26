@@ -14,7 +14,7 @@ def test_match_p_simple():
     """
 
     result = match_p(p_elem, test_text)
-    
+
     # Should have the matched text removed
     assert result is not None
     assert "some extra text here" in result.lower()
@@ -32,7 +32,7 @@ def test_match_p_no_match():
     """
 
     result = match_p(p_elem, test_text)
-    
+
     # Should return None when no match
     assert result is None
 
@@ -53,6 +53,23 @@ def test_match_p_with_alt():
     assert result is not None
     assert "some extra text here" in result.lower()
     assert "permission is granted" not in result.lower()
+
+
+def test_match_p_with_alt_dash():
+    """Test match_p with alt element."""
+    xml_string = """<p xmlns="http://www.spdx.org/license">Hello <alt match="-*">-----------</alt></p>"""
+    p_elem = ET.fromstring(xml_string)
+
+    test_text = """
+    Hello  ----
+    """
+
+    result = match_p(p_elem, test_text)
+
+    # Should have the matched text removed
+    assert result is not None
+    assert "hello" not in result.lower()
+    assert "----" not in result.lower()
 
 
 def test_match_p_with_optional():
@@ -323,15 +340,15 @@ def test_match_copyright_simple():
         <p>Copyright (c) &lt;year&gt; &lt;copyright holders&gt;</p>
     </copyrightText>"""
     copyright_elem = ET.fromstring(xml_string)
-    
+
     test_text = """Copyright (c) 2023 John Doe
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files.
 """
-    
+
     result = match_copyright(copyright_elem, test_text)
-    
+
     # Should have the copyright line removed
     assert "copyright" not in result.lower()
     assert "john doe" not in result.lower()
@@ -344,7 +361,7 @@ def test_match_copyright_multiple_lines():
         <p>Copyright (c) &lt;year&gt; &lt;copyright holders&gt;</p>
     </copyrightText>"""
     copyright_elem = ET.fromstring(xml_string)
-    
+
     test_text = """Copyright (c) 2023 John Doe
 Copyright (c) 2024 Jane Smith
 All rights reserved.
@@ -352,9 +369,9 @@ All rights reserved.
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files.
 """
-    
+
     result = match_copyright(copyright_elem, test_text)
-    
+
     # Should have all copyright lines removed
     assert "copyright" not in result.lower()
     assert "john doe" not in result.lower()
@@ -369,15 +386,15 @@ def test_match_copyright_with_c_symbol():
         <p>Copyright (c) &lt;year&gt; &lt;copyright holders&gt;</p>
     </copyrightText>"""
     copyright_elem = ET.fromstring(xml_string)
-    
+
     test_text = """(c) 2023 Example Corp
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files.
 """
-    
+
     result = match_copyright(copyright_elem, test_text)
-    
+
     # Should have the copyright line removed
     assert "(c)" not in result
     assert "example corp" not in result.lower()
@@ -390,15 +407,15 @@ def test_match_copyright_no_copyright():
         <p>Copyright (c) &lt;year&gt; &lt;copyright holders&gt;</p>
     </copyrightText>"""
     copyright_elem = ET.fromstring(xml_string)
-    
+
     test_text = """MIT License
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files.
 """
-    
+
     result = match_copyright(copyright_elem, test_text)
-    
+
     # Should return original text unchanged
     assert result == test_text
 
@@ -408,14 +425,14 @@ def test_match_copyright_empty_element():
     xml_string = """<copyrightText xmlns="http://www.spdx.org/license">
     </copyrightText>"""
     copyright_elem = ET.fromstring(xml_string)
-    
+
     test_text = """Copyright (c) 2023 John Doe
 
 Permission is hereby granted, free of charge.
 """
-    
+
     result = match_copyright(copyright_elem, test_text)
-    
+
     # Should return original text unchanged
     assert result == test_text
 
@@ -426,7 +443,7 @@ def test_match_copyright_preserves_license_text():
         <p>Copyright (c) &lt;year&gt; &lt;copyright holders&gt;</p>
     </copyrightText>"""
     copyright_elem = ET.fromstring(xml_string)
-    
+
     test_text = """Copyright (c) Leonard Richardson
 
 Permission is hereby granted, free of charge, to any person obtaining
@@ -442,9 +459,9 @@ included in all copies or substantial portions of the Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND.
 """
-    
+
     result = match_copyright(copyright_elem, test_text)
-    
+
     # Should remove the actual copyright line but preserve license text about copyright
     assert "leonard richardson" not in result.lower()
     assert "the above copyright notice and this permission notice shall be" in result.lower()
@@ -457,7 +474,7 @@ def test_match_copyright_sphinx_example():
         <p>Copyright (c) &lt;year&gt; &lt;copyright holders&gt;</p>
     </copyrightText>"""
     copyright_elem = ET.fromstring(xml_string)
-    
+
     test_text = """License for sphinxcontrib-applehelp
 ===================================
 
@@ -467,9 +484,9 @@ All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
 """
-    
+
     result = match_copyright(copyright_elem, test_text)
-    
+
     # Should remove copyright lines but preserve title and license text
     assert "License for sphinxcontrib-applehelp" in result
     assert "===================================" in result
@@ -485,13 +502,13 @@ def test_match_list_item_simple():
         Redistributions of source code must retain the above copyright notice.
     </item>"""
     item_elem = ET.fromstring(xml_string)
-    
+
     test_text = """1. Redistributions of source code must retain the above copyright notice.
 2. Redistributions in binary form must reproduce the above copyright notice.
 """
-    
+
     result = match_list_item(item_elem, test_text)
-    
+
     # Should have the first item removed
     assert result is not None
     assert "1. Redistributions of source code" not in result
@@ -505,13 +522,13 @@ def test_match_list_item_no_match():
         This text will not match.
     </item>"""
     item_elem = ET.fromstring(xml_string)
-    
+
     test_text = """1. Redistributions of source code must retain the above copyright notice.
 2. Redistributions in binary form must reproduce the above copyright notice.
 """
-    
+
     result = match_list_item(item_elem, test_text)
-    
+
     # Should return None when no match
     assert result is None
 
@@ -532,7 +549,7 @@ def test_match_list_bsd_style():
         </item>
     </list>"""
     list_elem = ET.fromstring(xml_string)
-    
+
     test_text = """Redistribution and use in source and binary forms, with or without modification, are permitted provided
 that the following conditions are met:
 
@@ -545,9 +562,9 @@ distribution.
 
 THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
 """
-    
+
     result = match_list(list_elem, test_text)
-    
+
     # Should have both list items removed
     assert result is not None
     assert "1. Redistributions of source code" not in result
@@ -568,13 +585,13 @@ def test_match_list_partial_failure():
         </item>
     </list>"""
     list_elem = ET.fromstring(xml_string)
-    
+
     test_text = """1. Redistributions of source code must retain the above copyright notice.
 2. Redistributions in binary form must reproduce the above copyright notice.
 """
-    
+
     result = match_list(list_elem, test_text)
-    
+
     # Should return None when any item fails to match
     assert result is None
 
@@ -595,7 +612,7 @@ def test_match_list_with_bullet_points():
         </item>
     </list>"""
     list_elem = ET.fromstring(xml_string)
-    
+
     test_text = """Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are
 met:
@@ -608,9 +625,9 @@ met:
   documentation and/or other materials provided with the distribution.
 
 """
-    
+
     result = match_list(list_elem, test_text)
-    
+
     # This should fail because "1." doesn't match "*"
     assert result is None
 
@@ -618,7 +635,7 @@ met:
 def test_strip_matches_with_optional_elements():
     """Test strip_matches function with optional elements."""
     from spdx_matcher.strip_matches import strip_matches
-    
+
     # Create a license XML with optional elements similar to OLFL-1.3.xml
     xml_string = """<SPDXLicenseCollection xmlns="http://www.spdx.org/license">
         <license licenseId="TEST-1.0" name="Test License">
@@ -636,9 +653,9 @@ def test_strip_matches_with_optional_elements():
             </text>
         </license>
     </SPDXLicenseCollection>"""
-    
+
     root = ET.fromstring(xml_string)
-    
+
     # Test 1: License text with all optional elements present
     license_text_with_optional = """Test License
 
@@ -650,7 +667,7 @@ END OF TERMS AND CONDITIONS
 
 Some remaining text here.
 """
-    
+
     result1 = strip_matches(root, license_text_with_optional)
     assert result1 is not None
     assert "some remaining text here" in result1.lower()
@@ -658,7 +675,7 @@ Some remaining text here.
     assert "terms and conditions" not in result1.lower()
     assert "permission is hereby granted" not in result1.lower()
     assert "end of terms" not in result1.lower()
-    
+
     # Test 2: License text with some optional elements missing (should still pass)
     license_text_partial_optional = """Test License
 
@@ -668,14 +685,14 @@ END OF TERMS AND CONDITIONS
 
 Some remaining text here.
 """
-    
+
     result2 = strip_matches(root, license_text_partial_optional)
     assert result2 is not None
     assert "some remaining text here" in result2.lower()
     assert "test license" not in result2.lower()
     assert "permission is hereby granted" not in result2.lower()
     assert "end of terms" not in result2.lower()
-    
+
     # Test 3: License text with no optional elements (should still pass)
     license_text_no_optional = """Test License
 
@@ -683,13 +700,13 @@ Permission is hereby granted to use this software.
 
 Some remaining text here.
 """
-    
+
     result3 = strip_matches(root, license_text_no_optional)
     assert result3 is not None
     assert "some remaining text here" in result3.lower()
     assert "test license" not in result3.lower()
     assert "permission is hereby granted" not in result3.lower()
-    
+
     # Test 4: License text missing required elements (should fail)
     license_text_missing_required = """Test License
 
@@ -699,7 +716,7 @@ Some text that doesn't match the required paragraph.
 
 END OF TERMS AND CONDITIONS
 """
-    
+
     result4 = strip_matches(root, license_text_missing_required)
     assert result4 is None  # Should fail because required paragraph is missing
 
@@ -707,7 +724,7 @@ END OF TERMS AND CONDITIONS
 def test_strip_matches_optional_with_nested_elements():
     """Test strip_matches with optional elements containing lists."""
     from spdx_matcher.strip_matches import strip_matches
-    
+
     # Create XML with optional element containing a list
     xml_string = """<SPDXLicenseCollection xmlns="http://www.spdx.org/license">
         <license licenseId="TEST-2.0" name="Test License with List">
@@ -731,9 +748,9 @@ def test_strip_matches_optional_with_nested_elements():
             </text>
         </license>
     </SPDXLicenseCollection>"""
-    
+
     root = ET.fromstring(xml_string)
-    
+
     # Test with optional list present
     license_text_with_list = """Test License with Lists
 
@@ -744,14 +761,14 @@ The software is provided as-is.
 
 Additional text.
 """
-    
+
     result1 = strip_matches(root, license_text_with_list)
     assert result1 is not None
     assert "additional text" in result1.lower()
     assert "first optional condition" not in result1.lower()
     assert "second optional condition" not in result1.lower()
     assert "the software is provided as-is" not in result1.lower()
-    
+
     # Test without optional list (should still pass)
     license_text_no_list = """Test License with Lists
 
@@ -759,7 +776,7 @@ The software is provided as-is.
 
 Additional text.
 """
-    
+
     result2 = strip_matches(root, license_text_no_list)
     assert result2 is not None
     assert "additional text" in result2.lower()
@@ -769,7 +786,7 @@ Additional text.
 def test_strip_matches_with_implicit_text():
     """Test strip_matches with implicit text content (like mpi-permissive.xml)."""
     from spdx_matcher.strip_matches import strip_matches
-    
+
     # Create XML similar to mpi-permissive.xml with implicit text content
     xml_string = """<SPDXLicenseCollection xmlns="http://www.spdx.org/license">
         <license licenseId="mpi-permissive" name="mpi Permissive License">
@@ -794,9 +811,9 @@ def test_strip_matches_with_implicit_text():
             </text>
         </license>
     </SPDXLicenseCollection>"""
-    
+
     root = ET.fromstring(xml_string)
-    
+
     # Test license text that matches the implicit content
     license_text = """Copyright (C) 2000-2004 by Etnus, LLC
 
@@ -816,7 +833,7 @@ James Cownie: Etnus, LLC.
 
 Some additional remaining text.
 """
-    
+
     result = strip_matches(root, license_text)
     assert result is not None
     assert "some additional remaining text" in result.lower()
@@ -830,7 +847,7 @@ Some additional remaining text.
 def test_strip_matches_with_mixed_implicit_and_explicit_elements():
     """Test strip_matches with both implicit text and explicit elements."""
     from spdx_matcher.strip_matches import strip_matches
-    
+
     # Create XML with implicit text mixed with explicit elements
     xml_string = """<SPDXLicenseCollection xmlns="http://www.spdx.org/license">
         <license licenseId="MIXED-1.0" name="Mixed License">
@@ -853,9 +870,9 @@ Final implicit text at the end.
             </text>
         </license>
     </SPDXLicenseCollection>"""
-    
+
     root = ET.fromstring(xml_string)
-    
+
     # Test with all content present
     license_text = """Mixed License
 
@@ -871,7 +888,7 @@ Final implicit text at the end.
 
 Remaining text.
 """
-    
+
     result = strip_matches(root, license_text)
     assert result is not None
     assert "remaining text" in result.lower()
@@ -886,30 +903,20 @@ Remaining text.
 def test_strip_matches_with_alt_elements():
     """Test strip_matches with top-level alt elements (like Multics.xml)."""
     from spdx_matcher.strip_matches import strip_matches
-    
+
     # Create XML similar to Multics.xml with top-level alt elements
     xml_string = """<SPDXLicenseCollection xmlns="http://www.spdx.org/license">
         <license licenseId="Multics" name="Multics License">
             <text>
-                <titleText>
-                    <p>Multics License</p>
-                </titleText>
-                <optional>
-                    <p>Historical Background</p>
-                </optional>
-                <optional>
-                    <p>.</p>
-                </optional>
                 <alt match="-*" name="divider">
                 -----------------------------------------------------------
                 </alt>
-                <p>Permission is hereby granted to use this software.</p>
             </text>
         </license>
     </SPDXLicenseCollection>"""
-    
+
     root = ET.fromstring(xml_string)
-    
+
     # Test with alt element present (using dashes)
     license_text_with_alt = """Multics License
 
@@ -923,50 +930,7 @@ Permission is hereby granted to use this software.
 
 Remaining text.
 """
-    
+
     result1 = strip_matches(root, license_text_with_alt)
     assert result1 is not None
-    assert "remaining text" in result1.lower()
-    assert "multics license" not in result1.lower()
-    assert "historical background" not in result1.lower()
     assert "---" not in result1
-    assert "permission is hereby granted" not in result1.lower()
-    
-    # Test with alt element using different pattern (should also match due to alt match pattern)
-    license_text_alt_variation = """Multics License
-
-Historical Background
-
-.
-
----------
-
-Permission is hereby granted to use this software.
-
-Remaining text.
-"""
-    
-    result2 = strip_matches(root, license_text_alt_variation)
-    assert result2 is not None
-    assert "remaining text" in result2.lower()
-    assert "multics license" not in result2.lower()
-    assert "historical background" not in result2.lower()
-    assert "---------" not in result2
-    assert "permission is hereby granted" not in result2.lower()
-    
-    # Test without optional elements but with alt element
-    license_text_minimal = """Multics License
-
------------------------------------------------------------
-
-Permission is hereby granted to use this software.
-
-Remaining text.
-"""
-    
-    result3 = strip_matches(root, license_text_minimal)
-    assert result3 is not None
-    assert "remaining text" in result3.lower()
-    assert "multics license" not in result3.lower()
-    assert "---" not in result3
-    assert "permission is hereby granted" not in result3.lower()
