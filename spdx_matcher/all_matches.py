@@ -1,10 +1,12 @@
 from typing import List, Tuple
+import logging
 
-from spdx_matcher.license_loader import load_licenses
 from spdx_matcher.strip_matches import strip_matches
 
+log = logging.getLogger(__name__)
 
-def find_all_matches(license_text: str, verbose: bool = False) -> List[Tuple[str, str]]:
+
+def find_all_matches(licenses, license_text: str) -> List[Tuple[str, str]]:
     """
     Try to match license text against all available SPDX license templates.
 
@@ -17,28 +19,25 @@ def find_all_matches(license_text: str, verbose: bool = False) -> List[Tuple[str
         remaining_text is None if match failed, otherwise it's the unmatched portion.
     """
     matches = []
-    licenses = load_licenses()
 
-    if verbose:
-        print(f"Testing against {len(licenses)} license templates...")
+    log.debug(f"Testing against {len(licenses)} license templates...")
 
     for i, (license_id, tree) in enumerate(licenses.items()):
 
-        print(f"Testing license {i + 1}/{len(licenses)}: {license_id}")
+        log.info(f"Testing license {i + 1}/{len(licenses)}: {license_id}")
 
         # Try to match
         result = strip_matches(tree, license_text)
 
         if result is not None:
             matches.append((license_id, result))
-            if verbose:
-                remaining_chars = len(result.strip()) if result else 0
-                print(f" Match found: {license_id} (remaining: {remaining_chars} chars)")
+            remaining_chars = len(result.strip()) if result else 0
+            log.info(f" Match found: {license_id} (remaining: {remaining_chars} chars)")
 
     return matches
 
 
-def find_best_matches(license_text: str, verbose: bool = False) -> List[Tuple[str, str, int]]:
+def find_best_matches(licenses, license_text: str) -> List[Tuple[str, str, int]]:
     """
     Find the best matching SPDX licenses by amount of text matched.
 
@@ -51,7 +50,7 @@ def find_best_matches(license_text: str, verbose: bool = False) -> List[Tuple[st
         List of tuples (license_id, remaining_text, remaining_char_count)
         sorted by fewest remaining characters (best matches first).
     """
-    matches = find_all_matches(license_text, verbose)
+    matches = find_all_matches(licenses, license_text)
 
     # Calculate remaining character counts and sort
     scored_matches = []
