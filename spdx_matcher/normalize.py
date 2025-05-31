@@ -2,6 +2,17 @@ import re
 from .word_variants import equivalent
 
 
+def punctuation_normalizer(text: str) -> str:
+    """
+    handle commas that are,like,this
+    """
+
+    text = re.sub(r"([a-zA-Z0-9])\s*,", r"\1,", text)  # Ensure no space before comma
+    text = re.sub(r",([a-zA-Z0-9])", r", \1", text)  # Ensure space after comma
+    text = re.sub(r"\s*,\s*", ", ", text)  # Normalize spaces around commas
+    return text
+
+
 def punctuation_replacer(text: str) -> str:
     """Handle punctuation variations per SPDX guidelines.
 
@@ -14,7 +25,8 @@ def punctuation_replacer(text: str) -> str:
     text = re.sub(r"[-–—−]", r"-", text)
 
     # Replace various quote types with pattern that matches any quote
-    text = re.sub(r'["\'`]+', '"', text)
+    # text = re.sub(r'["\'`’“”]+', "'", text)
+    text = re.sub(r'["\'`’“”]+', "'", text)
 
     return text
 
@@ -56,7 +68,7 @@ def bullet_replacer(text: str) -> str:
 
     def _bullet_replacer_line(line):
         return re.sub(
-            r"^\s*([0-9]+(\.[0-9])?|[\-*•]+|[abcdefgivx]+[\.\)]|\([abcdefgivx]+\)|\[[abcdefgivx]+\])\s+",
+            r"^\s*([0-9]+(\.[0-9])?|[\.\-*•]+|[abcdefgivx]+[\.\)]|\([abcdefgivx]+\)|\[[abcdefgivx]+\])\s+",
             " • ",
             line,
             flags=re.IGNORECASE,
@@ -83,7 +95,7 @@ def equivalent_replacer(text: str) -> str:
     return text
 
 
-def normalize(text: str) -> str:
+def normalize(text: str, bullets=False) -> str:
     """
     Normalize text for license matching.
 
@@ -101,10 +113,14 @@ def normalize(text: str) -> str:
     # Strip leading/trailing whitespace
 
     text = punctuation_replacer(text)
-    text = bullet_replacer(text)
+    text = punctuation_normalizer(text)
+
+    if bullets:
+        text = bullet_replacer(text)
+
     text = copyright_symbol_replacer(text)
     text = http_protocol_replacer(text)
-    text = equivalent_replacer(text)
     text = whitespace_replacer(text)
+    text = equivalent_replacer(text)
     text = text.strip()
     return text

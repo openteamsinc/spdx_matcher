@@ -1,9 +1,9 @@
 import click
 import logging
-import xml.etree.ElementTree as ET
+from lxml import etree
 from pathlib import Path
 from .transformer import XMLToRegexTransformer
-from .types import LicenseMatcher
+from .types import LicenseMatcher, LicenseResult
 from .normalize import normalize as normalize_fn
 from pprint import pprint
 
@@ -39,13 +39,13 @@ def transform(xml_file):
     """
 
     # Parse the XML file
-    tree = ET.parse(xml_file)
-    root = tree.getroot()
+    with open(xml_file, "rb") as fd:
+        xml_str = fd.read()
+    root = etree.fromstring(xml_str)
 
     # Transform using our XMLToRegexTransformer
     transformer = XMLToRegexTransformer()
     result = transformer.transform(root)
-    print(result)
     click.echo(f"Transformed {xml_file.name}:")
     click.echo("=" * 50)
 
@@ -71,9 +71,10 @@ def match_license(template_xml, license_file):
         license_file: Path to the license text file to match
     """
 
-    # Parse the template XML file
-    tree = ET.parse(template_xml)
-    root = tree.getroot()
+    with open(template_xml, "rb") as fd:
+        xml_str = fd.read()
+
+    root = etree.fromstring(xml_str)
 
     # Transform template to LicenseMatcher
     transformer = XMLToRegexTransformer()
@@ -94,21 +95,30 @@ def match_license(template_xml, license_file):
             return
 
     normalized_license_text = normalize_fn(license_text)
-    result = template_matcher.match(normalized_license_text)
+    result = LicenseResult(normalized_license_text)
 
     click.echo(f"Matching {license_file.name} against template {template_xml.name}:")
     click.echo("=" * 60)
 
-    if result is None:
-        click.echo("❌ NO MATCH - Some parts of the template were not found in the license text")
+    template_matcher.match(result)
+
+    remaining_text = result.text.strip()
+    if remaining_text:
+        click.echo("Remaining text after matching:")
+        click.echo("-" * 40)
+        click.echo(result.text)
     else:
-        click.echo("✅ MATCH - All template parts found in license text")
-        if result.strip():
-            click.echo(f"\nUnmatched text remaining ({len(result)} characters):")
-            click.echo("-" * 40)
-            click.echo(result[:500] + ("..." if len(result) > 500 else ""))
-        else:
-            click.echo("\n🎯 PERFECT MATCH - All text matched, no remainder")
+        click.echo("🎯 PERFECT MATCH - All text matched, no remainder")
+    # if result is None:
+    #     click.echo("❌ NO MATCH - Some parts of the template were not found in the license text")
+    # else:
+    #     click.echo("✅ MATCH - All template parts found in license text")
+    #     if result.strip():
+    #         click.echo(f"\nUnmatched text remaining ({len(result)} characters):")
+    #         click.echo("-" * 40)
+    #         click.echo(result[:500] + ("..." if len(result) > 500 else ""))
+    #     else:
+    #         click.echo("\n🎯 PERFECT MATCH - All text matched, no remainder")
 
 
 if __name__ == "__main__":

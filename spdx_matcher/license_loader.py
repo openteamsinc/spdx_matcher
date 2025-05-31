@@ -1,4 +1,5 @@
 import xml.etree.ElementTree as ET
+from lxml import etree
 from typing import Dict, Optional, Tuple
 from importlib.resources import files
 from importlib.abc import Traversable
@@ -12,9 +13,9 @@ def load_license(license_filename: str) -> ET.Element:
 
 def load_license_from_traversable(license_file: Traversable) -> Tuple[Optional[str], ET.Element]:
 
-    with license_file.open() as fd:
-        tree = ET.parse(fd)
-    root = tree.getroot()
+    with license_file.open("rb") as fd:
+        data = fd.read()
+    root = etree.fromstring(data)
 
     #     # Extract license information
     #     # The {http://www.spdx.org/license} prefix is due to XML namespace
