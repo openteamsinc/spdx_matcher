@@ -1,17 +1,18 @@
+import re
 from xml.etree.ElementTree import Element
-from .regexes import apply_all_replacers, bullet_replacer, copyright_symbol_replacer
 from typing import Optional, List
-from .types import Matcher, LicenseMatcher, TransformResult, ListMatcher
+from .types import Matcher, LicenseMatcher, TransformResult, ListMatcher, OptionalMatcher, RegexMatcher, BulletMatcher
+from .normalize import normalize
 
 
 def make_xpath(elem: Element) -> str:
     """Generate xpath for an element by walking up the tree."""
     path = []
-    current = elem
+    current: Optional[Element] = elem
     while current is not None:
         tag = current.tag.split("}")[-1] if "}" in current.tag else current.tag
         path.append(tag)
-        current = current.getparent() if hasattr(current, "getparent") else None
+        current = current.getparent() if current and hasattr(current, "getparent") else None  # type: ignore
     return "/" + "/".join(reversed(path)) if path else "/"
 
 
@@ -22,17 +23,17 @@ class XMLToRegexTransformer:
         handler_method_name = f"_transform_{tag}"
         handler = getattr(self, handler_method_name)
         matcher = handler(element)
-        # if type(matcher) is Matcher and len(matcher.parts) == 1 and isinstance(matcher.parts[0], str):
-        #     return r"\s*".join(matcher.parts)  # type: ignore
-        if type(matcher) is Matcher and all(isinstance(part, str) for part in matcher.parts):
-            return r"\s*".join(matcher.parts)  # type: ignore
+        if isinstance(matcher, Matcher):
+            matcher.parts = [part for part in matcher.parts if part]
+
         return matcher
 
     def _transform_p(self, element: Element) -> TransformResult:
         parts: List[TransformResult] = []
 
         if element.text:
-            parts.append(apply_all_replacers(element.text.strip()))
+
+            parts.append(normalize(element.text.strip()))
 
         for child in element:
             child_result = self.transform(child)
@@ -40,34 +41,30 @@ class XMLToRegexTransformer:
                 parts.append(child_result)
 
             if child.tail:
-                parts.append(apply_all_replacers(child.tail.strip()))
 
+                tail = normalize(child.tail.strip())
+                parts.append(tail)
         return Matcher(parts=parts, xpath=make_xpath(element))
 
-    def _transform_alt(self, element: Element) -> str:
+    def _transform_alt(self, element: Element) -> RegexMatcher:
         match_pattern = element.get("match")
         assert match_pattern
-        return f"({match_pattern})"
+        return RegexMatcher(regex=match_pattern, xpath=make_xpath(element))
 
-    def _transform_optional(self, element: Element) -> str:
-        parts: List[str] = []
+    def _transform_optional(self, element: Element) -> OptionalMatcher:
+        parts: List[TransformResult] = []
 
         if element.text:
-            parts.append(apply_all_replacers(element.text.strip()))
+            parts.append(normalize(element.text.strip()))
 
         for child in element:
             child_result = self.transform(child)
-            if child_result:
-                assert isinstance(child_result, str), "Child result must be a string for optional transformation"
-                parts.append(child_result)
+            parts.append(child_result)
 
             if child.tail:
-                parts.append(apply_all_replacers(child.tail.strip()))
+                parts.append(normalize(child.tail.strip()))
 
-        assert len(parts), "Optional element must have at least one part"
-
-        content = r"\s*".join(parts)
-        return f"({content})?"
+        return OptionalMatcher(parts=parts, xpath=make_xpath(element))
 
     def _transform_text(self, element: Element) -> LicenseMatcher:
         parts: List[TransformResult] = []
@@ -91,7 +88,7 @@ class XMLToRegexTransformer:
     def _transform_titleText(self, element: Element) -> Matcher:
         parts: List[TransformResult] = []
         if element.text:
-            r = apply_all_replacers(element.text.strip())
+            r = normalize(element.text.strip())
             parts.append(r)
         for child in element:
 
@@ -107,42 +104,58 @@ class XMLToRegexTransformer:
             text = self.transform(child)
             if text:
                 parts.append(text)
-        return f'^\s*{copyright_symbol_replacer("copyright")}.*?(?=\n\s*\n|$)'
+        return RegexMatcher(regex=r"^\s*copyright.*", xpath=make_xpath(element), flags=re.IGNORECASE | re.MULTILINE)
 
     def _transform_list(self, element: Element) -> ListMatcher:
         parts: List[TransformResult] = []
 
         if element.text:
-            parts.append(apply_all_replacers(element.text.strip()))
+            parts.append(normalize(element.text.strip()))
 
         for child in element:
             child_result = self.transform(child)
             parts.append(child_result)
 
             if child.tail:
-                parts.append(apply_all_replacers(child.tail.strip()))
+                parts.append(normalize(child.tail.strip()))
 
         return ListMatcher(parts=parts, xpath=make_xpath(element))
 
-    def _transform_item(self, element: Element) -> str:
-        parts = []
+    def _transform_item(self, element: Element) -> Matcher:
+        parts: List[TransformResult] = []
 
         if element.text:
-            parts.append(apply_all_replacers(element.text.strip()))
+            parts.append(normalize(element.text.strip()))
 
         for child in element:
             child_result = self.transform(child)
-            if isinstance(child_result, str) and child_result:
+            parts.append(child_result)
+
+            if child.tail:
+                parts.append(normalize(child.tail.strip()))
+        return Matcher(parts=parts, xpath=make_xpath(element))
+
+    def _transform_bullet(self, element: Element) -> BulletMatcher:
+        return BulletMatcher(xpath=make_xpath(element))
+
+    def _transform_br(self, element: Element) -> str:
+        return " "
+
+    def _transform_standardLicenseHeader(self, element: Element) -> Matcher:
+        parts: List[TransformResult] = []
+
+        if element.text:
+            parts.append(normalize(element.text.strip()))
+
+        for child in element:
+            child_result = self.transform(child)
+            if child_result:
                 parts.append(child_result)
 
             if child.tail:
-                parts.append(apply_all_replacers(child.tail.strip()))
+                parts.append(normalize(child.tail.strip()))
 
-        content = r"\s*".join(filter(None, parts))
-        return content
-
-    def _transform_bullet(self, element: Element) -> str:
-        return bullet_replacer()
+        return Matcher(parts=parts, xpath=make_xpath(element))
 
     def _transform_SPDXLicenseCollection(self, element: Element) -> LicenseMatcher:
         children = list(element)
@@ -156,10 +169,11 @@ class XMLToRegexTransformer:
 
     def _transform_license(self, element: Element) -> LicenseMatcher:
         children = list(element)
-        assert len(children) == 2, "License should have exactly one child element"
-        child = children[1]
-        tag = child.tag.split("}")[-1] if "}" in child.tag else child.tag
-        assert tag == "text", "Child of license should be a text element"
+        child_tags = [child.tag.split("}")[-1] if "}" in child.tag else child.tag for child in children]
+        assert "text" in child_tags, f"License element should have a text child, found: {child_tags}"
+
+        child = children[child_tags.index("text")]
+
         result = self.transform(child)
         assert isinstance(result, LicenseMatcher), "Result should be a LicenseMatcher"
         return result

@@ -63,7 +63,7 @@ def _match_transform_result(transform_result: TransformResult, text: str) -> Opt
         The remaining text after removing the matched portion
     """
     if isinstance(transform_result, str):
-        logger.debug(f"Matching string pattern:\n\t'{transform_result!r}")
+        logger.debug(f"Matching string pattern:\n\t{transform_result!r}")
         logger.debug(f"Against text\n\t{text!r}")
 
         # For string patterns, try to match as regex
@@ -72,6 +72,7 @@ def _match_transform_result(transform_result: TransformResult, text: str) -> Opt
         match = pattern.search(text)
         if match:
             logger.debug(f"Regex match found at position {match.span()}")
+            logger.debug(f"Matched text:\n\t{match.group(0)!r}")
             # Remove the matched text and return the remainder
             start, end = match.span()
             return text[:start] + text[end:]

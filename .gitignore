@@ -3,3 +3,4 @@ venv10/
 __pycache__
 build/
 spdx_matcher/licenses/*.xml
+.venv/

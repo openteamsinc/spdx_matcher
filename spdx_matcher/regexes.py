@@ -15,7 +15,13 @@ def whitespace_replacer(text: str) -> str:
 
     Per SPDX guidelines: All whitespace should be treated as a single blank space.
     """
-    return re.sub(r"\s+", r"\\s+", text)
+    # Handle both regular whitespace and escaped whitespace from re.escape()
+    # First replace any sequence of escaped spaces and regular whitespace with \\s+
+
+    # can not use \s in repl arg of re.sub
+    text = re.sub(r"(\\\\ |\\\s|\s)+", r"\\s+", text)
+
+    return text
 
 
 def punctuation_replacer(text: str) -> str:
@@ -92,22 +98,22 @@ def http_protocol_replacer(text: str) -> str:
 
 def bullet_replacer() -> str:
     """Return regex pattern that matches various bullet point styles.
-    
-    Per SPDX guidelines: Where a line starts with a bullet, number, letter, 
-    or some form of a list item (determined where list item is followed by 
-    a space, then the text of the sentence), ignore the list item for 
+
+    Per SPDX guidelines: Where a line starts with a bullet, number, letter,
+    or some form of a list item (determined where list item is followed by
+    a space, then the text of the sentence), ignore the list item for
     matching purposes.
-    
+
     Matches:
     - Numbers: 1, 2., 1.0, etc.
     - Letters: a, b., A), etc.
     - Symbols: -, *, •, etc.
     - Parenthetical: (1), (a), [i], etc.
-    
+
     Returns:
         Regex pattern string that matches bullet point indicators
     """
-    return r"(?:\d+\.?|\w\.?|[•\-\*]|\([a-zA-Z0-9]+\)|\[[a-zA-Z0-9]+\])\s*"
+    return r"([a-zA-Z0-9]+[:\.\)]|[•\-\*]|\([a-zA-Z0-9]+\)|\[[a-zA-Z0-9]+\])\s+"
 
 
 def apply_all_replacers(text: str) -> str:
@@ -119,6 +125,10 @@ def apply_all_replacers(text: str) -> str:
     Returns:
         Text processed with all SPDX matching guidelines applied
     """
+
+    # First escape regex special characters to treat text as literal
+    text = re.escape(text)
+
     # Order matters for some replacers
     text = copyright_symbol_replacer(text)
     text = http_protocol_replacer(text)
