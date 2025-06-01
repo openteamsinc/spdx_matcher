@@ -26,7 +26,7 @@ def punctuation_replacer(text: str) -> str:
 
     # Replace various quote types with pattern that matches any quote
     # text = re.sub(r'["\'`’“”]+', "'", text)
-    text = re.sub(r'["\'`’“”]+', "'", text)
+    text = re.sub(r'["\'`’“”‘]+', "'", text)
 
     return text
 

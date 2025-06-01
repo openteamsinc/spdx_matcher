@@ -10,11 +10,10 @@ from .matchers import LicenseMatcher
 from .base_matcher import NoMatchError, LicenseResult
 from .normalize import normalize
 
-all_ids = {os.path.splitext(f)[0] for f in os.listdir("license-list-XML/src/") if f.endswith(".xml")}
+all_ids = {os.path.splitext(f)[0] for f in os.listdir("spdx_matcher/licenses/") if f.endswith(".xml")}
 
 expected_failures = (
     {
-        "Bitstream-Charter",
         "CC-BY-3.0-AU",
         "CC-BY-3.0-DE",
         "CC-BY-NC-3.0-DE",
@@ -26,7 +25,6 @@ expected_failures = (
         "CC-BY-SA-3.0-DE",
         "CC-PDM-1.0",
         "Community-Spec-1.0",
-        "EPL-2.0",
         "EUPL-1.2",
         "LAL-1.3",
         "LiLiQ-Rplus-1.1",
@@ -34,8 +32,6 @@ expected_failures = (
         "MPEG-SSG",
         "MPL-2.0-no-copyleft-exception",
         "NASA-1.3",
-        "OGL-UK-1.0",
-        "OGL-UK-2.0",
         "SSH-OpenSSH",
         "TPL-1.0",
         "URT-RLE",
@@ -44,21 +40,10 @@ expected_failures = (
         "copyleft-next-0.3.0",
         "copyleft-next-0.3.1",
         "dtoa",
-        "radvd",
-        "ssh-keyscan",
-        "xlock",
-    }
-    | {  # Bad xml patterns
-        "CAL-1.0",
-        "CAL-1.0-Combined-Work-Exception",
-        "CC-BY-NC-ND-3.0-IGO",
-        "Plexus",
     }
     | {
         "LPPL-1.3c",
-        "Python-2.0.1",
         "LPPL-1.3a",
-        "CC-BY-NC-SA-2.0-FR",
     }
     | {  # some type of line prefix
         "mpi-permissive",
@@ -87,7 +72,7 @@ class TestAllLicenses:
     def test_license_xml_to_text_matching(self, license_id):
         """Test that license XML can match against corresponding text file."""
         # Load XML file
-        xml_path = f"license-list-XML/src/{license_id}.xml"
+        xml_path = f"spdx_matcher/licenses/{license_id}.xml"
         if not os.path.exists(xml_path):
             pytest.skip(f"XML file not found: {xml_path}")
 
