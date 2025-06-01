@@ -3,7 +3,7 @@ import logging
 from lxml import etree
 from pathlib import Path
 from .transformer import XMLToRegexTransformer
-from .types import LicenseMatcher, LicenseResult
+from .matchers import LicenseMatcher, LicenseResult
 from .normalize import normalize as normalize_fn
 from pprint import pprint
 

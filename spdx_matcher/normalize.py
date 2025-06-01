@@ -77,6 +77,27 @@ def bullet_replacer(text: str) -> str:
     return "\n".join(_bullet_replacer_line(line) for line in text.splitlines())
 
 
+def separator_replacer(text: str) -> str:
+    """
+    To avoid the possibility of a non-match due to the existence or absence of code
+    comment indicators placed within the license text, e.g., at the start of
+    each line of text, or repetitive characters to establish a separation of text,
+    e.g., ---, ===, ___, or ***.
+
+    Guideline:
+        A non-letter character repeated 3 or more times to establish a visual separation
+        should be ignored for matching purposes.
+    """
+    # return text
+
+    def _separator_replacer_line(line):
+        # Replace any sequence of non-letter characters repeated 3 or more times with a single space
+
+        return re.sub(r"^[^a-zA-Z0-9\s]{3,}", " ", line).strip()
+
+    return "\n".join(_separator_replacer_line(line) for line in text.splitlines())
+
+
 def whitespace_replacer(text: str) -> str:
     paragraphs = re.split(r"\n\s*\n+", text)
     # Clean whitespace within each paragraph
@@ -105,15 +126,12 @@ def normalize(text: str, bullets=False) -> str:
     Returns:
         Normalized text: lowercase, single spaces, no newlines
     """
-    # Convert to lowercase
+
     text = text.lower()
-
-    # Replace all whitespace (including newlines) with single spaces
-
-    # Strip leading/trailing whitespace
 
     text = punctuation_replacer(text)
     text = punctuation_normalizer(text)
+    # text = separator_replacer(text)
 
     if bullets:
         text = bullet_replacer(text)
