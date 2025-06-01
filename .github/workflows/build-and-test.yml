@@ -49,6 +49,6 @@ jobs:
           python -m twine check  dist/*
 
           python -m venv check-venv
-          source check-venv/bin/activate
 
-          spdx-match --help
+          ./check-venv/bin/pip install dist/*.whl
+          ./check-venv/bin/spdx-match --help
