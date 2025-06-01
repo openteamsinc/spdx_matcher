@@ -7,6 +7,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+        with:
+          submodules: recursive
 
       - name: Set up Python 3.10
         uses: actions/setup-python@v4
@@ -27,22 +29,12 @@ jobs:
       - name: Lint with flake8 and black
         run: |
           # stop the build if there are Python syntax errors or undefined names
-          flake8 score/
-          black score/ --check
+          flake8 spdx_matcher/
+          black spdx_matcher/ --check
       - name: Typecheck with mypy
         run: |
-          mypy score/
-      - name: Sanity Check
-        run: |
-          # stop the build if there are Python syntax errors or undefined names
-          env CACHE_LOCATION=/tmp python -m score.app
+          mypy spdx_matcher/
       - name: Test
         run: |
           # stop the build if there are Python syntax errors or undefined names
-          py.test score/ -v
-      - name: Check pyi
-        run: |
-          python -m score.notes.data
-          git diff --exit-code score/notes || ( \
-            echo "Error: Running drizzle-kit generate produced changes. Please run locally and commit changes." && exit 1 \
-          )
+          py.test spdx_matcher/ -v
