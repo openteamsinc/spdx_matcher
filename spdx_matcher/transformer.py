@@ -2,7 +2,16 @@ import re
 
 from lxml.etree import _Element as Element
 from typing import Optional, List
-from .types import Matcher, LicenseMatcher, TransformResult, ListMatcher, OptionalMatcher, RegexMatcher, BulletMatcher
+from .matchers import (
+    Matcher,
+    LicenseMatcher,
+    TransformResult,
+    ListMatcher,
+    OptionalMatcher,
+    RegexMatcher,
+    BulletMatcher,
+    BaseMatcher,
+)
 from .normalize import normalize
 
 
@@ -35,8 +44,8 @@ class XMLToRegexTransformer:
         handler_method_name = f"_transform_{tag}"
         handler = getattr(self, handler_method_name)
         matcher = handler(element)
-        if isinstance(matcher, Matcher):
-            matcher.parts = [part for part in matcher.parts if part]
+        if isinstance(matcher, BaseMatcher):
+            matcher = matcher.simplify()
 
         return matcher
 
@@ -82,9 +91,16 @@ class XMLToRegexTransformer:
         title: Optional[TransformResult] = None
         # copyright: Optional[TransformResult] = None
 
+        if element.text:
+            parts.append(normalize(element.text.strip()))
+
         for child in element:
             tag = child.tag.split("}")[-1] if "}" in child.tag else child.tag
             child_result = self.transform(child)
+
+            if child.tail:
+                parts.append(normalize(child.tail.strip()))
+
             if tag == "titleText":
                 title = child_result
                 continue
@@ -102,7 +118,7 @@ class XMLToRegexTransformer:
         return LicenseMatcher(title=title, copyright=copyright, parts=parts, xpath=make_xpath(element))
 
     def _transform_titleText(self, element: Element) -> Matcher:
-        parts: List[TransformResult] = []
+        parts: List[TransformResult] = [RegexMatcher(regex=r"^(\s*[#*]\s*)?", xpath="")]
         if element.text:
             r = normalize(element.text.strip())
             parts.append(r)
@@ -195,7 +211,9 @@ class XMLToRegexTransformer:
         return result
 
 
-def element_to_regex(element: Element, transformer: Optional[XMLToRegexTransformer] = None) -> TransformResult:
+def transform(element: Element, transformer: Optional[XMLToRegexTransformer] = None) -> LicenseMatcher:
     if transformer is None:
         transformer = XMLToRegexTransformer()
-    return transformer.transform(element)
+    t = transformer.transform(element)
+    assert isinstance(t, LicenseMatcher), "Transformed result should be a LicenseMatcher"
+    return t
