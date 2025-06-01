@@ -41,7 +41,7 @@ jobs:
           # stop the build if there are Python syntax errors or undefined names
           py.test spdx_license_matcher/ -v
 
-      - name: Package
+      - name: Build Package
         run: |
           # stop the build if there are Python syntax errors or undefined names
           pip install build twine
@@ -49,6 +49,8 @@ jobs:
           python -m twine check  dist/*
 
           python -m venv check-venv
+      - name: Check Package
+        run: |
 
           ./check-venv/bin/pip install dist/*.whl
-          ./check-venv/bin/spdx-match --help
+          ./check-venv/bin/spdx-match find ./LICENSE
