@@ -38,8 +38,6 @@ class LicenseResult:
 
         text = self.text.strip()
         if isinstance(tr, str):
-            tr = tr.replace("\n", " ")
-            text = text.replace("\n", " ")
             log.debug(f"Matching {'optional' if optional else ''} string:\n\t{tr!r}\n\nin text:\n\t{text!r}")
             if tr not in text:
                 log.debug("❌ String not found in text")
@@ -64,8 +62,6 @@ class LicenseResult:
         return tr.match(self, optional=optional)
 
     def regex(self, pattern, flags, optional=False) -> bool:
-        if pattern == ".+":
-            raise re.error("can not have an isolated .+")
         log.debug(f"Matching regex:\n\t{pattern!r}\n\nin text:\n\t{self.text!r}")
         assert isinstance(pattern, str), "Pattern must be a string"
         match = re.search(pattern, self.text, flags)
