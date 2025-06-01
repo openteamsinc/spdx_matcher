@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "spdx-license-matcher"
-version = "0.1.1"
+version = "0.1.2"
 description = "Tool for matching and working with SPDX licenses"
 readme = "README.md"
 requires-python = ">=3.8"
