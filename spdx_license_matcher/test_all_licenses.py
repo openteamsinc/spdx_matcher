@@ -10,7 +10,7 @@ from .matchers import LicenseMatcher
 from .base_matcher import NoMatchError, LicenseResult
 from .normalize import normalize
 
-all_ids = {os.path.splitext(f)[0] for f in os.listdir("spdx_matcher/licenses/") if f.endswith(".xml")}
+all_ids = {os.path.splitext(f)[0] for f in os.listdir("spdx_license_matcher/licenses/") if f.endswith(".xml")}
 
 expected_failures = (
     {
@@ -60,7 +60,7 @@ class TestAllLicenses:
     def test_license_xml_to_text_matching(self, license_id):
         """Test that license XML can match against corresponding text file."""
         # Load XML file
-        xml_path = f"spdx_matcher/licenses/{license_id}.xml"
+        xml_path = f"spdx_license_matcher/licenses/{license_id}.xml"
         if not os.path.exists(xml_path):
             pytest.skip(f"XML file not found: {xml_path}")
 
