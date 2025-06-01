@@ -29,8 +29,10 @@ expected_failures = (
         "CC-BY-NC-SA-2.0-DE",
         "LPPL-1.3c",
         "LPPL-1.3a",
+        "CC-BY-NC-ND-3.0-IGO",
     }
     | {  # some type of line prefix in text file
+        "ssh-keyscan",
         "mpi-permissive",
         "MPL-2.0",
         "SSH-OpenSSH",
