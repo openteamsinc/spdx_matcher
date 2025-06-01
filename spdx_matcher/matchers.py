@@ -102,11 +102,7 @@ class LicenseMatcher(Matcher):
         result.rewind()
 
         if self.title:
-            print("<<<<< title----")
-            print(result)
             result.match(self.title, optional=True)
-            print(result)
-            print(">>>>> title----")
 
         if self.copyright:
             did_match = result.match(self.copyright, optional=True)
