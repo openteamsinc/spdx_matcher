@@ -92,8 +92,7 @@ def separator_replacer(text: str) -> str:
 
     def _separator_replacer_line(line):
         # Replace any sequence of non-letter characters repeated 3 or more times with a single space
-
-        return re.sub(r"^[^a-zA-Z0-9\s]{3,}", " ", line).strip()
+        return re.sub(r"^([^a-zA-Z0-9\s])\1{3,}", " ", line).strip()
 
     return "\n".join(_separator_replacer_line(line) for line in text.splitlines())
 
@@ -131,7 +130,7 @@ def normalize(text: str, bullets=False) -> str:
 
     text = punctuation_replacer(text)
     text = punctuation_normalizer(text)
-    # text = separator_replacer(text)
+    text = separator_replacer(text)
 
     if bullets:
         text = bullet_replacer(text)

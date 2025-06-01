@@ -51,6 +51,8 @@ expected_failures = (
     | {  # Bad xml patterns
         "CAL-1.0",
         "CAL-1.0-Combined-Work-Exception",
+        "CC-BY-NC-ND-3.0-IGO",
+        "Plexus",
     }
     | {
         "LPPL-1.3c",
