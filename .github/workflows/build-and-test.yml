@@ -44,7 +44,7 @@ jobs:
       - name: Package
         run: |
           # stop the build if there are Python syntax errors or undefined names
-          pip install build
+          pip install build twine
           python -m build
           python -m twine check  dist/*
 
