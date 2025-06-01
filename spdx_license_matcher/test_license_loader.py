@@ -1,4 +1,4 @@
-from spdx_matcher.license_loader import load_licenses
+from spdx_license_matcher.license_loader import load_licenses
 
 
 def test_load_licenses():

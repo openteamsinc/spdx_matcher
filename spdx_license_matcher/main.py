@@ -5,6 +5,7 @@ from pathlib import Path
 from .transformer import XMLToRegexTransformer
 from .matchers import LicenseMatcher, LicenseResult
 from .normalize import normalize as normalize_fn
+from .find import find_license
 from pprint import pprint
 
 
@@ -109,16 +110,21 @@ def match_license(template_xml, license_file):
         click.echo(result.text)
     else:
         click.echo("🎯 PERFECT MATCH - All text matched, no remainder")
-    # if result is None:
-    #     click.echo("❌ NO MATCH - Some parts of the template were not found in the license text")
-    # else:
-    #     click.echo("✅ MATCH - All template parts found in license text")
-    #     if result.strip():
-    #         click.echo(f"\nUnmatched text remaining ({len(result)} characters):")
-    #         click.echo("-" * 40)
-    #         click.echo(result[:500] + ("..." if len(result) > 500 else ""))
-    #     else:
-    #         click.echo("\n🎯 PERFECT MATCH - All text matched, no remainder")
+
+
+@cli.command()
+@click.argument("license_file", type=click.Path(exists=True, path_type=Path))
+def find(license_file):
+
+    with open(license_file) as fd:
+        license_text = fd.read()
+    licenses = find_license(license_text)
+    for license_id, extra_characters in licenses:
+        click.echo(f"Found license: {license_id}")
+        if extra_characters > 0:
+            click.echo(f"  Extra characters: {extra_characters}")
+        else:
+            click.echo("🎯 Perfect match with no extra characters")
 
 
 if __name__ == "__main__":

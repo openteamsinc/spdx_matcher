@@ -6,7 +6,7 @@ from importlib.abc import Traversable
 
 
 def load_license(license_filename: str) -> Element:
-    license_file = files("spdx_matcher.licenses").joinpath(license_filename)
+    license_file = files("spdx_license_matcher.licenses").joinpath(license_filename)
     _, root = load_license_from_traversable(license_file)
     return root
 
@@ -43,7 +43,7 @@ def load_licenses() -> Dict[str, Element]:
     """
     licenses: Dict[str, Element] = {}
 
-    for filename in files("spdx_matcher.licenses").iterdir():
+    for filename in files("spdx_license_matcher.licenses").iterdir():
         if not filename.is_file():
             continue
         if not filename.name.endswith(".xml"):

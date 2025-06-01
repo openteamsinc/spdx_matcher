@@ -30,12 +30,27 @@ jobs:
       - name: Lint with flake8 and black
         run: |
           # stop the build if there are Python syntax errors or undefined names
-          flake8 spdx_matcher/
-          black spdx_matcher/ --check
+          flake8 spdx_license_matcher/
+          black spdx_license_matcher/ --check
       - name: Typecheck with mypy
         run: |
-          mypy spdx_matcher/
+          mypy spdx_license_matcher/
+
       - name: Test
         run: |
           # stop the build if there are Python syntax errors or undefined names
-          py.test spdx_matcher/ -v
+          py.test spdx_license_matcher/ -v
+
+      - name: Build Package
+        run: |
+          # stop the build if there are Python syntax errors or undefined names
+          pip install build twine
+          python -m build
+          python -m twine check  dist/*
+
+          python -m venv check-venv
+      - name: Check Package
+        run: |
+
+          ./check-venv/bin/pip install dist/*.whl
+          ./check-venv/bin/spdx-match find ./LICENSE
