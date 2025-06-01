@@ -1,17 +1,17 @@
-import xml.etree.ElementTree as ET
+from lxml.etree import _Element as Element
 from lxml import etree
 from typing import Dict, Optional, Tuple
 from importlib.resources import files
 from importlib.abc import Traversable
 
 
-def load_license(license_filename: str) -> ET.Element:
+def load_license(license_filename: str) -> Element:
     license_file = files("spdx_matcher.licenses").joinpath(license_filename)
     _, root = load_license_from_traversable(license_file)
     return root
 
 
-def load_license_from_traversable(license_file: Traversable) -> Tuple[Optional[str], ET.Element]:
+def load_license_from_traversable(license_file: Traversable) -> Tuple[Optional[str], Element]:
 
     with license_file.open("rb") as fd:
         data = fd.read()
@@ -31,7 +31,7 @@ def load_license_from_traversable(license_file: Traversable) -> Tuple[Optional[s
     return license_id, root
 
 
-def load_licenses() -> Dict[str, ET.Element]:
+def load_licenses() -> Dict[str, Element]:
     """
     Load all SPDX license XML files from the specified directory into a dictionary.
 
@@ -41,10 +41,7 @@ def load_licenses() -> Dict[str, ET.Element]:
     Returns:
         Dictionary with SPDX IDs as keys and license data as values
     """
-    licenses: Dict[str, ET.Element] = {}
-
-    # Register the namespace to avoid the ns0 prefix in element tags
-    ET.register_namespace("", "http://www.spdx.org/license")
+    licenses: Dict[str, Element] = {}
 
     for filename in files("spdx_matcher.licenses").iterdir():
         if not filename.is_file():
