@@ -1,1 +1,1 @@
-include spdx_license_matcher/licences/*.xml
+include spdx_license_matcher/licenses/*.xml
