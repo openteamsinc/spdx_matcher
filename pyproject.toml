@@ -4,14 +4,14 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "spdx-license-matcher"
-version = "0.1.0"
+version = "0.1.1"
 description = "Tool for matching and working with SPDX licenses"
 readme = "README.md"
 requires-python = ">=3.8"
 license = "MIT"
 authors = [{ name = "Sean Ross-Ross" }]
 classifiers = ["Intended Audience :: Developers"]
-dependencies = ["lxml>=4.6.0"]
+dependencies = ["lxml~=5.4.0", "click~=8.2.1"]
 
 [project.optional-dependencies]
 dev = [
