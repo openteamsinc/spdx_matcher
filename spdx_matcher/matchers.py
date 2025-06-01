@@ -15,7 +15,7 @@ class BulletMatcher(BaseMatcher):
 
     def match(self, result: LicenseResult, optional: bool) -> bool:
         result.regex(
-            r"^\s*([a-z0-9]+(\.[0-9])?[\.\)]|[\.\-*•]|\([a-z0-9]+\)|\[[a-z0-9]+\])\s+",
+            r"^\s*([a-z0-9]+(\.[0-9]+)*[\.\)]|[\.\-*•]|\([a-z0-9]+\)|\[[a-z0-9]+\])\s+",
             flags=re.IGNORECASE,
             optional=True,
         )

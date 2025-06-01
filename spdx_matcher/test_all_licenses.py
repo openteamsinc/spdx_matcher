@@ -14,40 +14,26 @@ all_ids = {os.path.splitext(f)[0] for f in os.listdir("spdx_matcher/licenses/") 
 
 expected_failures = (
     {
-        "CC-BY-3.0-AU",
-        "CC-BY-3.0-DE",
-        "CC-BY-NC-3.0-DE",
-        "CC-BY-NC-ND-3.0-DE",
-        "CC-BY-NC-SA-2.0-DE",
-        "CC-BY-NC-SA-3.0-DE",
-        "CC-BY-NC-SA-3.0-IGO",
-        "CC-BY-ND-3.0-DE",
-        "CC-BY-SA-3.0-DE",
-        "CC-PDM-1.0",
-        "Community-Spec-1.0",
-        "EUPL-1.2",
-        "LAL-1.3",
-        "LiLiQ-Rplus-1.1",
-        "MIT-testregex",
         "MPEG-SSG",
         "MPL-2.0-no-copyleft-exception",
         "NASA-1.3",
-        "SSH-OpenSSH",
         "TPL-1.0",
         "URT-RLE",
         "X11-swapped",
         "checkmk",
         "copyleft-next-0.3.0",
         "copyleft-next-0.3.1",
-        "dtoa",
     }
-    | {
+    | {  # ?? wrong
+        "MIT-testregex",
+        "CC-BY-NC-SA-2.0-DE",
         "LPPL-1.3c",
         "LPPL-1.3a",
     }
-    | {  # some type of line prefix
+    | {  # some type of line prefix in text file
         "mpi-permissive",
         "MPL-2.0",
+        "SSH-OpenSSH",
     }
 )
 

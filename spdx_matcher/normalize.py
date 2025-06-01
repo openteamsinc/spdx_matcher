@@ -7,9 +7,10 @@ def punctuation_normalizer(text: str) -> str:
     handle commas that are,like,this
     """
 
-    text = re.sub(r"([a-zA-Z0-9])\s*,", r"\1,", text)  # Ensure no space before comma
-    text = re.sub(r",([a-zA-Z0-9])", r", \1", text)  # Ensure space after comma
-    text = re.sub(r"\s*,\s*", ", ", text)  # Normalize spaces around commas
+    text = re.sub(r"([a-zA-Z0-9'])\s*([\.,:])", r"\1\2", text)  # Ensure no space before puncuation
+    text = re.sub(r"([,:])([a-zA-Z0-9'])", r"\1 \2", text)  # Ensure space after puncuation
+
+    text = re.sub(r"\s*([,])\s*", r"\1 ", text)  # Normalize spaces around commas
     return text
 
 
@@ -26,7 +27,7 @@ def punctuation_replacer(text: str) -> str:
 
     # Replace various quote types with pattern that matches any quote
     # text = re.sub(r'["\'`’“”]+', "'", text)
-    text = re.sub(r'["\'`’“”‘]+', "'", text)
+    text = re.sub(r'["\'`’“”‘„]+', "'", text)
 
     return text
 
