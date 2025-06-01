@@ -46,7 +46,7 @@ class XMLToRegexTransformer:
         if element.text:
             parts.append(normalize(element.text.strip()))
 
-        for child in element.getchildren():
+        for child in element:
             child_result = self.transform(child)
             if child_result:
                 parts.append(child_result)
@@ -68,7 +68,7 @@ class XMLToRegexTransformer:
         if element.text:
             parts.append(normalize(element.text.strip()))
 
-        for child in element.getchildren():
+        for child in element:
             child_result = self.transform(child)
             parts.append(child_result)
 
@@ -82,7 +82,7 @@ class XMLToRegexTransformer:
         title: Optional[TransformResult] = None
         # copyright: Optional[TransformResult] = None
 
-        for child in element.getchildren():
+        for child in element:
             tag = child.tag.split("}")[-1] if "}" in child.tag else child.tag
             child_result = self.transform(child)
             if tag == "titleText":
@@ -106,7 +106,7 @@ class XMLToRegexTransformer:
         if element.text:
             r = normalize(element.text.strip())
             parts.append(r)
-        for child in element.getchildren():
+        for child in element:
 
             text = self.transform(child)
             if text:
@@ -116,7 +116,7 @@ class XMLToRegexTransformer:
 
     def _transform_copyrightText(self, element: Element) -> TransformResult:
         parts: List[TransformResult] = []
-        for child in element.getchildren():
+        for child in element:
             text = self.transform(child)
             if text:
                 parts.append(text)
@@ -128,7 +128,7 @@ class XMLToRegexTransformer:
         if element.text:
             parts.append(normalize(element.text.strip()))
 
-        for child in element.getchildren():
+        for child in element:
             child_result = self.transform(child)
             parts.append(child_result)
 
@@ -143,7 +143,7 @@ class XMLToRegexTransformer:
         if element.text:
             parts.append(normalize(element.text.strip()))
 
-        for child in element.getchildren():
+        for child in element:
             child_result = self.transform(child)
             parts.append(child_result)
 
@@ -163,7 +163,7 @@ class XMLToRegexTransformer:
         if element.text:
             parts.append(normalize(element.text.strip()))
 
-        for child in element.getchildren():
+        for child in element:
             child_result = self.transform(child)
             if child_result:
                 parts.append(child_result)
@@ -174,7 +174,7 @@ class XMLToRegexTransformer:
         return Matcher(parts=parts, xpath=make_xpath(element))
 
     def _transform_SPDXLicenseCollection(self, element: Element) -> LicenseMatcher:
-        children = element.getchildren()
+        children = element
         assert len(children) == 1, "SPDXLicenseCollection should have exactly one child element"
         child = children[0]
         tag = child.tag.split("}")[-1] if "}" in child.tag else child.tag
@@ -184,7 +184,7 @@ class XMLToRegexTransformer:
         return result
 
     def _transform_license(self, element: Element) -> LicenseMatcher:
-        children = element.getchildren()
+        children = element
         child_tags = [child.tag.split("}")[-1] if "}" in child.tag else child.tag for child in children]
         assert "text" in child_tags, f"License element should have a text child, found: {child_tags}"
 
