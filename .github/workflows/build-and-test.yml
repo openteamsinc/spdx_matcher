@@ -47,3 +47,8 @@ jobs:
           pip install build
           python -m build
           python -m twine check  dist/*
+
+          python -m venv check-venv
+          source check-venv/bin/activate
+
+          spdx-match --help

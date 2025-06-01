@@ -7,6 +7,7 @@ name = "spdx-license-matcher"
 version = "0.1.2"
 description = "Tool for matching and working with SPDX licenses"
 readme = "README.md"
+spdx-match = "spdx_license_matcher.main:cli"
 requires-python = ">=3.8"
 license = "MIT"
 authors = [{ name = "Sean Ross-Ross" }]
