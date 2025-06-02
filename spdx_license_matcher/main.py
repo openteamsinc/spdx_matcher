@@ -1,4 +1,6 @@
 import click
+import sys
+import textwrap
 import logging
 from lxml import etree
 from pathlib import Path
@@ -114,29 +116,38 @@ def match_license(template_xml, license_file):
 
 @cli.command()
 @click.argument("license_file", type=click.Path(exists=True, path_type=Path))
-def find(license_file):
+@click.option("--best", is_flag=True, help="Stop after finding the best match")
+def find(license_file: str, best=False) -> None:
 
     with open(license_file) as fd:
         license_text = fd.read()
     licenses = find_license(license_text)
-    for data in licenses:
+    if len(licenses) == 0:
+        click.echo("No matching licenses found.", err=True)
+        sys.exit(1)
+
+    for i, data in enumerate(licenses):
         name = data["name"]
         spdx_id = data["spdx_id"]
-        extra_characters = data["extra_characters"]
+        extra_characters: str = data["extra_characters"]
         restrictions = data["restrictions"]
         kind = data["kind"]
 
-        click.echo(f"Found license: {spdx_id!r}")
+        click.echo(f"{'✅' if i==0 else ''} Found license: {spdx_id!r}")
         click.echo(f"  Name: {name} ({kind})")
         if restrictions:
-            print("restrictions", (restrictions,))
             click.echo(f"  Restrictions: {', '.join(restrictions)}")
         else:
             click.echo("  No restrictions")
-        if extra_characters > 0:
-            click.echo(f"  Extra characters: {extra_characters}")
+        if len(extra_characters) > 0:
+            click.echo("  Extra characters:")
+            click.echo(textwrap.indent(extra_characters, "| "))
+
         else:
             click.echo("🎯 Perfect match with no extra characters")
+
+        if best:
+            return
 
 
 if __name__ == "__main__":

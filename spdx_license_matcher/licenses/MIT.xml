@@ -31,7 +31,8 @@
                match="Software|Materials" name="Software5">Software</alt>.</p>
 
          <p>THE <alt match="SOFTWARE IS|MATERIALS ARE" name="Software-verb">SOFTWARE IS</alt>
-            PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT
+            PROVIDED <alt match="[*&quot;']">"</alt>AS IS<alt match="[\*&quot;']">"</alt>,
+            WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT
             LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
             NONINFRINGEMENT. IN NO EVENT SHALL <alt match=".+" name="copyrightHolder">THE AUTHORS OR
             COPYRIGHT HOLDERS</alt> BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN

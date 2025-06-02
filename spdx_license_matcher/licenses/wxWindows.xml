@@ -17,15 +17,15 @@
              library give permission for additional uses of the
              text contained in this release of the library as
              licenced under the wxWindows Library Licence, applying
-             either version 3.1 of the Licence, or (at your option)
+             either version <alt name="v0" match="\d(\.\d)?" >3.1</alt> of the Licence, or (at your option)
              any later version of the Licence as published by the
-             copyright holders of version 3.1 of the Licence
+             copyright holders of version <alt name="v1" match="\d(\.\d)?" >3.1</alt> of the Licence
              document.
         </item>
         <item>
             <bullet>2.</bullet>
           The exception is that you may use, copy, link, modify and
-             distribute under your own terms, binary object code
+             distribute under <alt name="your-own" match="(your own|the user's own)">your own</alt> terms, binary object code
              versions of works based on the Library.
         </item>
         <item>

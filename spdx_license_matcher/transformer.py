@@ -98,18 +98,18 @@ class XMLToRegexTransformer:
             tag = child.tag.split("}")[-1] if "}" in child.tag else child.tag
             child_result = self.transform(child)
 
-            if child.tail:
-                parts.append(normalize(child.tail.strip()))
-
-            if tag == "titleText":
-                title = child_result
+            if tag in ["titleText", "copyrightText"]:
+                if tag == "titleText":
+                    title = child_result
                 continue
-            if tag == "copyrightText":
+            else:
                 # Ignore because we want to match any line starting with copyright
                 # copyright = child_result
-                continue
 
-            parts.append(child_result)
+                parts.append(child_result)
+
+            if child.tail:
+                parts.append(normalize(child.tail.strip()))
 
         copyright = RegexMatcher(
             regex=r"^\s*copyright.*", xpath=make_xpath(element), flags=re.IGNORECASE | re.MULTILINE
@@ -211,6 +211,7 @@ class XMLToRegexTransformer:
         result.name = str(element.attrib.get("name"))
         result.kind = element.attrib.get("kind")
         result.restrictions = [r for r in element.attrib.get("restrictions", "").split("|") if r.strip()]
+        result.is_osi_approved = element.attrib.get("isOsiApproved", "false").lower() == "true"
         return result
 
 
