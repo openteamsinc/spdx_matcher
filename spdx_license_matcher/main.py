@@ -119,8 +119,20 @@ def find(license_file):
     with open(license_file) as fd:
         license_text = fd.read()
     licenses = find_license(license_text)
-    for license_id, extra_characters in licenses:
-        click.echo(f"Found license: {license_id}")
+    for data in licenses:
+        name = data["name"]
+        spdx_id = data["spdx_id"]
+        extra_characters = data["extra_characters"]
+        restrictions = data["restrictions"]
+        kind = data["kind"]
+
+        click.echo(f"Found license: {spdx_id!r}")
+        click.echo(f"  Name: {name} ({kind})")
+        if restrictions:
+            print("restrictions", (restrictions,))
+            click.echo(f"  Restrictions: {', '.join(restrictions)}")
+        else:
+            click.echo("  No restrictions")
         if extra_characters > 0:
             click.echo(f"  Extra characters: {extra_characters}")
         else:

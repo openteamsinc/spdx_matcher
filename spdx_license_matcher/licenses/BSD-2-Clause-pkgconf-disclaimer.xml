@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <SPDXLicenseCollection xmlns="http://www.spdx.org/license">
-   <license isOsiApproved="false" licenseId="BSD-2-Clause-pkgconf-disclaimer"
+   <license kind="BSD" restrictions="" isOsiApproved="false" licenseId="BSD-2-Clause-pkgconf-disclaimer"
       name="BSD 2-Clause pkgconf disclaimer variant" listVersionAdded="3.27.0">
       <crossRefs>
          <crossRef>https://github.com/audacious-media-player/audacious/blob/master/src/audacious/main.cc</crossRef>

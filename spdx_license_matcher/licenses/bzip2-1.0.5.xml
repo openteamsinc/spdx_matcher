@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <SPDXLicenseCollection xmlns="http://www.spdx.org/license">
-   <license isOsiApproved="false" licenseId="bzip2-1.0.5"
+   <license kind="bzip2" restrictions="" isOsiApproved="false" licenseId="bzip2-1.0.5"
             name="bzip2 and libbzip2 License v1.0.5"
             listVersionAdded="1.20"
             deprecatedVersion="3.16">

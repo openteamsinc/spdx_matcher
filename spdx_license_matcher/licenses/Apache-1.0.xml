@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <SPDXLicenseCollection xmlns="http://www.spdx.org/license">
-   <license isOsiApproved="false" licenseId="Apache-1.0" name="Apache License 1.0">
+   <license kind="Apache" restrictions="patent-grant" isOsiApproved="false" licenseId="Apache-1.0" name="Apache License 1.0">
       <crossRefs>
          <crossRef>http://www.apache.org/licenses/LICENSE-1.0</crossRef>
       </crossRefs>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <SPDXLicenseCollection xmlns="http://www.spdx.org/license">
-   <license isOsiApproved="true" licenseId="ECL-1.0"
+   <license kind="ECL" restrictions="patent-grant" isOsiApproved="true" licenseId="ECL-1.0"
             name="Educational Community License v1.0">
       <crossRefs>
          <crossRef>https://opensource.org/licenses/ECL-1.0</crossRef>

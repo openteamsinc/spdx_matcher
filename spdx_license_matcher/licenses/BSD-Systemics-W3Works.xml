@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <SPDXLicenseCollection xmlns="http://www.spdx.org/license">
-   <license isOsiApproved="false" licenseId="BSD-Systemics-W3Works"
+   <license kind="BSD" restrictions="" isOsiApproved="false" licenseId="BSD-Systemics-W3Works"
    name="Systemics W3Works BSD variant license" listVersionAdded="3.23">
       <crossRefs>
          <crossRef>https://metacpan.org/release/DPARIS/Crypt-Blowfish-2.14/source/COPYRIGHT#L7</crossRef>

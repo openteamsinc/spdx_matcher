@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <SPDXLicenseCollection xmlns="http://www.spdx.org/license">
-  <license licenseId="AGPL-3.0" isOsiApproved="true"
+  <license kind="AGPL" restrictions="derivative-work-copyleft|network-copyleft|source-disclosure" licenseId="AGPL-3.0" isOsiApproved="true"
   name="GNU Affero General Public License v3.0"
   deprecatedVersion="3.0">
     <obsoletedBys>

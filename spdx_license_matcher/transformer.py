@@ -208,6 +208,9 @@ class XMLToRegexTransformer:
 
         result = self.transform(child)
         assert isinstance(result, LicenseMatcher), "Result should be a LicenseMatcher"
+        result.name = str(element.attrib.get("name"))
+        result.kind = element.attrib.get("kind")
+        result.restrictions = [r for r in element.attrib.get("restrictions", "").split("|") if r.strip()]
         return result
 
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <SPDXLicenseCollection xmlns="http://www.spdx.org/license">
-   <license isOsiApproved="false" licenseId="AGPL-1.0-or-later"
+   <license kind="AGPL" restrictions="derivative-work-copyleft|network-copyleft|source-disclosure" isOsiApproved="false" licenseId="AGPL-1.0-or-later"
             name="Affero General Public License v1.0 or later">
       <crossRefs>
          <crossRef>http://www.affero.org/oagpl.html</crossRef>

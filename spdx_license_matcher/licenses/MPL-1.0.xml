@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <SPDXLicenseCollection xmlns="http://www.spdx.org/license">
-   <license isOsiApproved="true" licenseId="MPL-1.0" name="Mozilla Public License 1.0">
+   <license kind="MPL" restrictions="file-copyleft|patent-grant" isOsiApproved="true" licenseId="MPL-1.0" name="Mozilla Public License 1.0">
       <crossRefs>
          <crossRef>http://www.mozilla.org/MPL/MPL-1.0.html</crossRef>
          <crossRef>https://opensource.org/licenses/MPL-1.0</crossRef>

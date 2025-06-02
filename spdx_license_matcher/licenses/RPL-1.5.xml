@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <SPDXLicenseCollection xmlns="http://www.spdx.org/license">
-   <license isOsiApproved="true" licenseId="RPL-1.5" name="Reciprocal Public License 1.5">
+   <license kind="RPL" restrictions="modification-disclosure|deployment-trigger|patent-grant" isOsiApproved="true" licenseId="RPL-1.5" name="Reciprocal Public License 1.5">
       <crossRefs>
          <crossRef>https://opensource.org/licenses/RPL-1.5</crossRef>
       </crossRefs>

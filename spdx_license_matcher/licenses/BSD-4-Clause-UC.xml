@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <SPDXLicenseCollection xmlns="http://www.spdx.org/license">
-   <license isOsiApproved="false" licenseId="BSD-4-Clause-UC"
+   <license kind="BSD" restrictions="" isOsiApproved="false" licenseId="BSD-4-Clause-UC"
             name="BSD-4-Clause (University of California-Specific)">
       <crossRefs>
          <crossRef>http://www.freebsd.org/copyright/license.html</crossRef>

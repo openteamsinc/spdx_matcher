@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <SPDXLicenseCollection xmlns="http://www.spdx.org/license">
-   <license isOsiApproved="false" licenseId="MIT-testregex"
+   <license kind="MIT" restrictions="" isOsiApproved="false" licenseId="MIT-testregex"
    name="MIT testregex Variant" listVersionAdded="3.22">
       <crossRefs>
 <crossRef>https://github.com/dotnet/runtime/blob/55e1ac7c07df62c4108d4acedf78f77574470ce5/src/libraries/System.Text.RegularExpressions/tests/FunctionalTests/AttRegexTests.cs#L12-L28</crossRef>

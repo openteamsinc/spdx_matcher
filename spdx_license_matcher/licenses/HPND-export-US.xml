@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <SPDXLicenseCollection xmlns="http://www.spdx.org/license">
-	<license isOsiApproved="false" licenseId="HPND-export-US"
+	<license kind="HPND" restrictions="" isOsiApproved="false" licenseId="HPND-export-US"
 		name="HPND with US Government export control warning" listVersionAdded="3.20">
 	<crossRefs>
 		<crossRef>https://www.kermitproject.org/ck90.html#source</crossRef>

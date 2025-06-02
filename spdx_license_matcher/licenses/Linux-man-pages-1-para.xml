@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <SPDXLicenseCollection xmlns="http://www.spdx.org/license">
-   <license isOsiApproved="false" licenseId="Linux-man-pages-1-para"
+   <license kind="Linux" restrictions="" isOsiApproved="false" licenseId="Linux-man-pages-1-para"
    name="Linux man-pages - 1 paragraph" listVersionAdded="3.21">
       <crossRefs>
          <crossRef>https://git.kernel.org/pub/scm/docs/man-pages/man-pages.git/tree/man2/getcpu.2#n4</crossRef>

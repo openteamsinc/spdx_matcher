@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <SPDXLicenseCollection xmlns="http://www.spdx.org/license">
-  <license licenseId="GPL-1.0-only" isOsiApproved="false"
+  <license kind="GPL" restrictions="derivative-work-copyleft|source-disclosure" licenseId="GPL-1.0-only" isOsiApproved="false"
   name="GNU General Public License v1.0 only">
     <crossRefs>
       <crossRef>https://www.gnu.org/licenses/old-licenses/gpl-1.0-standalone.html</crossRef>

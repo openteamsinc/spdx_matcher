@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <SPDXLicenseCollection xmlns="http://www.spdx.org/license">
-    <license isOsiApproved="false" licenseId="HPND-export-US-modify" name="HPND with US Government export control warning and modification rqmt" listVersionAdded="3.22">
+    <license kind="HPND" restrictions="" isOsiApproved="false" licenseId="HPND-export-US-modify" name="HPND with US Government export control warning and modification rqmt" listVersionAdded="3.22">
         <crossRefs>
             <crossRef>https://github.com/krb5/krb5/blob/krb5-1.21.2-final/NOTICE#L1157-L1182</crossRef>
             <crossRef>https://github.com/pythongssapi/k5test/blob/v0.10.3/K5TEST-LICENSE.txt</crossRef>

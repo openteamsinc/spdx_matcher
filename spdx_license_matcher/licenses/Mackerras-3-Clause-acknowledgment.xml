@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <SPDXLicenseCollection xmlns="http://www.spdx.org/license">
-   <license isOsiApproved="false" licenseId="Mackerras-3-Clause-acknowledgment"
+   <license kind="Mackerras" restrictions="" isOsiApproved="false" licenseId="Mackerras-3-Clause-acknowledgment"
    name="Mackerras 3-Clause - acknowledgment variant" listVersionAdded="3.23">
       <crossRefs>
          <crossRef>https://github.com/ppp-project/ppp/blob/master/pppd/auth.c#L6-L28</crossRef>

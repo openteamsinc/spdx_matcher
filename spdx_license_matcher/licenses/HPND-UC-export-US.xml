@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <SPDXLicenseCollection xmlns="http://www.spdx.org/license">
-   <license isOsiApproved="false" licenseId="HPND-UC-export-US"
+   <license kind="HPND" restrictions="" isOsiApproved="false" licenseId="HPND-UC-export-US"
       name="Historical Permission Notice and Disclaimer - University of California, US export warning"
       listVersionAdded="3.24.0">
       <crossRefs>

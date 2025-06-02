@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <SPDXLicenseCollection xmlns="http://www.spdx.org/license">
-   <license isOsiApproved="false" licenseId="HPND-MIT-disclaimer"
+   <license kind="HPND" restrictions="" isOsiApproved="false" licenseId="HPND-MIT-disclaimer"
    name="Historical Permission Notice and Disclaimer with MIT disclaimer" listVersionAdded="3.23">
       <crossRefs>
          <crossRef>https://metacpan.org/release/NLNETLABS/Net-DNS-SEC-1.22/source/LICENSE</crossRef>

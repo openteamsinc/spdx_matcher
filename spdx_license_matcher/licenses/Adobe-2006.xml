@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <SPDXLicenseCollection xmlns="http://www.spdx.org/license">
-   <license isOsiApproved="false" licenseId="Adobe-2006"
+   <license kind="Adobe" restrictions="" isOsiApproved="false" licenseId="Adobe-2006"
             name="Adobe Systems Incorporated Source Code License Agreement">
       <crossRefs>
          <crossRef>https://fedoraproject.org/wiki/Licensing/AdobeLicense</crossRef>

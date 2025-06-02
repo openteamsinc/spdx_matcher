@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <SPDXLicenseCollection xmlns="http://www.spdx.org/license">
-   <license isOsiApproved="false" licenseId="Linux-man-pages-copyleft-2-para"
+   <license kind="Linux" restrictions="" isOsiApproved="false" licenseId="Linux-man-pages-copyleft-2-para"
    name="Linux man-pages Copyleft - 2 paragraphs" listVersionAdded="3.21">
       <crossRefs>
          <crossRef>https://git.kernel.org/pub/scm/docs/man-pages/man-pages.git/tree/man2/move_pages.2#n5</crossRef>

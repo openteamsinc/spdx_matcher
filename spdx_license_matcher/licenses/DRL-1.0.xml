@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <SPDXLicenseCollection xmlns="http://www.spdx.org/license">
-<license licenseId="DRL-1.0" name="Detection Rule License 1.0" isOsiApproved="false" listVersionAdded="3.12">
+<license kind="DRL" restrictions="" licenseId="DRL-1.0" name="Detection Rule License 1.0" isOsiApproved="false" listVersionAdded="3.12">
     <crossRefs>
     	 <crossRef>https://github.com/Neo23x0/sigma/blob/master/LICENSE.Detection.Rules.md</crossRef>
     </crossRefs>

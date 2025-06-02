@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <SPDXLicenseCollection xmlns="http://www.spdx.org/license">
-   <license isOsiApproved="true" licenseId="EFL-1.0" name="Eiffel Forum License v1.0">
+   <license kind="EFL" restrictions="" isOsiApproved="true" licenseId="EFL-1.0" name="Eiffel Forum License v1.0">
       <crossRefs>
          <crossRef>http://www.eiffel-nice.org/license/forum.txt</crossRef>
          <crossRef>https://opensource.org/licenses/EFL-1.0</crossRef>

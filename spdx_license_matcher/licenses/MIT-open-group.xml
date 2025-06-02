@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <SPDXLicenseCollection xmlns="http://www.spdx.org/license">
-    <license isOsiApproved="false" licenseId="MIT-open-group"
+    <license kind="MIT" restrictions="" isOsiApproved="false" licenseId="MIT-open-group"
              name="MIT Open Group variant" listVersionAdded="3.11">
         <crossRefs>
             <crossRef>https://gitlab.freedesktop.org/xorg/app/iceauth/-/blob/master/COPYING</crossRef>

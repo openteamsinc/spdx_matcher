@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <SPDXLicenseCollection xmlns="http://www.spdx.org/license">
-   <license isOsiApproved="true" licenseId="EPL-1.0" name="Eclipse Public License 1.0">
+   <license kind="EPL" restrictions="file-copyleft|patent-grant" isOsiApproved="true" licenseId="EPL-1.0" name="Eclipse Public License 1.0">
       <crossRefs>
          <crossRef>http://www.eclipse.org/legal/epl-v10.html</crossRef>
          <crossRef>https://opensource.org/licenses/EPL-1.0</crossRef>

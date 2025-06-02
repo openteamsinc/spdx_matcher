@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <SPDXLicenseCollection xmlns="http://www.spdx.org/license">
-<license isOsiApproved="false" licenseId="FSL-1.1-MIT"
+<license kind="FSL" restrictions="" isOsiApproved="false" licenseId="FSL-1.1-MIT"
    name="Functional Source License, Version 1.1, MIT Future License" listVersionAdded="3.27.0">
   <crossRefs>
       <crossRef>https://fsl.software/FSL-1.1-MIT.template.md</crossRef>

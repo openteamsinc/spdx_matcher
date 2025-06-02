@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <SPDXLicenseCollection xmlns="http://www.spdx.org/license">
-   <license isOsiApproved="false" licenseId="HPND-sell-variant-MIT-disclaimer"
+   <license kind="HPND" restrictions="" isOsiApproved="false" licenseId="HPND-sell-variant-MIT-disclaimer"
    name="HPND sell variant with MIT disclaimer" listVersionAdded="3.20">
       <crossRefs>
          <crossRef>https://github.com/sigmavirus24/x11-ssh-askpass/blob/master/README</crossRef>

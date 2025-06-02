@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <SPDXLicenseCollection xmlns="http://www.spdx.org/license">
-   <license isOsiApproved="false" licenseId="SSH-OpenSSH" name="SSH OpenSSH license" listVersionAdded="3.7">
+   <license kind="SSH" restrictions="" isOsiApproved="false" licenseId="SSH-OpenSSH" name="SSH OpenSSH license" listVersionAdded="3.7">
     <crossRefs>
         <crossRef>https://github.com/openssh/openssh-portable/blob/1b11ea7c58cd5c59838b5fa574cd456d6047b2d4/LICENCE#L10</crossRef>
     </crossRefs>

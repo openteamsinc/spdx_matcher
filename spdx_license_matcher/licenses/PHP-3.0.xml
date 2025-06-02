@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <SPDXLicenseCollection xmlns="http://www.spdx.org/license">
-   <license isOsiApproved="true" licenseId="PHP-3.0" name="PHP License v3.0">
+   <license kind="PHP" restrictions="" isOsiApproved="true" licenseId="PHP-3.0" name="PHP License v3.0">
       <crossRefs>
          <crossRef>http://www.php.net/license/3_0.txt</crossRef>
          <crossRef>https://opensource.org/licenses/PHP-3.0</crossRef>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <SPDXLicenseCollection xmlns="http://www.spdx.org/license">
-   <license isOsiApproved="false" licenseId="Bitstream-Charter"
+   <license kind="Bitstream" restrictions="" isOsiApproved="false" licenseId="Bitstream-Charter"
       name="Bitstream Charter Font License" listVersionAdded="3.20">
       <crossRefs>
          <crossRef>https://fedoraproject.org/wiki/Licensing/Charter#License_Text</crossRef>

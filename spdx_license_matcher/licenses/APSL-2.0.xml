@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <SPDXLicenseCollection xmlns="http://www.spdx.org/license">
-   <license isOsiApproved="true" licenseId="APSL-2.0"
+   <license kind="APSL" restrictions="weak-copyleft|patent-grant|choice-of-venue|source-disclosure" isOsiApproved="true" licenseId="APSL-2.0"
             name="Apple Public Source License 2.0">
       <crossRefs>
          <crossRef>http://www.opensource.apple.com/license/apsl/</crossRef>

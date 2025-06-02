@@ -1,4 +1,4 @@
-from dataclasses import dataclass, replace
+from dataclasses import dataclass, replace, field
 from typing import List, Optional, Any
 import logging
 import re
@@ -94,6 +94,9 @@ class OptionalMatcher(Matcher):
 class LicenseMatcher(Matcher):
     copyright: Optional[TransformResult]
     title: Optional[TransformResult]
+    name: Optional[str] = None
+    kind: Optional[str] = None
+    restrictions: List[str] = field(default_factory=list)
 
     def match(self, result: LicenseResult, optional: bool = False) -> bool:
 

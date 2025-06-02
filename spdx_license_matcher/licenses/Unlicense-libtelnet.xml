@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <SPDXLicenseCollection xmlns="http://www.spdx.org/license">
-   <license isOsiApproved="false" licenseId="Unlicense-libtelnet"
+   <license kind="Unlicense" restrictions="" isOsiApproved="false" licenseId="Unlicense-libtelnet"
    name="Unlicense - libtelnet variant" listVersionAdded="3.27.0">
       <crossRefs>
          <crossRef>https://github.com/seanmiddleditch/libtelnet/blob/develop/COPYING</crossRef>

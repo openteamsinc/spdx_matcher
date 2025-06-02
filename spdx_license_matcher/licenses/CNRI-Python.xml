@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <SPDXLicenseCollection xmlns="http://www.spdx.org/license">
-   <license isOsiApproved="true" licenseId="CNRI-Python" name="CNRI Python License">
+   <license kind="CNRI" restrictions="" isOsiApproved="true" licenseId="CNRI-Python" name="CNRI Python License">
       <crossRefs>
          <crossRef>https://opensource.org/licenses/CNRI-Python</crossRef>
       </crossRefs>

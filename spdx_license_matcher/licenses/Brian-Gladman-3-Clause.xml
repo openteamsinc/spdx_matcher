@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <SPDXLicenseCollection xmlns="http://www.spdx.org/license">
-   <license isOsiApproved="false" licenseId="Brian-Gladman-3-Clause"
+   <license kind="Brian" restrictions="" isOsiApproved="false" licenseId="Brian-Gladman-3-Clause"
    name="Brian Gladman 3-Clause License" listVersionAdded="3.20">
       <crossRefs>
          <crossRef>https://github.com/SWI-Prolog/packages-clib/blob/master/sha1/brg_endian.h</crossRef>

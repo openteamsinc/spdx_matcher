@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <SPDXLicenseCollection xmlns="http://www.spdx.org/license">
-   <license isOsiApproved="false" licenseId="CNRI-Python-GPL-Compatible"
+   <license kind="CNRI" restrictions="" isOsiApproved="false" licenseId="CNRI-Python-GPL-Compatible"
             name="CNRI Python Open Source GPL Compatible License Agreement">
       <crossRefs>
          <crossRef>http://www.python.org/download/releases/1.6.1/download_win/</crossRef>

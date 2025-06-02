@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <SPDXLicenseCollection xmlns="http://www.spdx.org/license">
-   <license isOsiApproved="false" licenseId="Boehm-GC"
+   <license kind="Boehm" restrictions="" isOsiApproved="false" licenseId="Boehm-GC"
    name="Boehm-Demers-Weiser GC License" listVersionAdded="3.21">
       <crossRefs>
          <crossRef>https://fedoraproject.org/wiki/Licensing:MIT#Another_Minimal_variant_(found_in_libatomic_ops)</crossRef>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <SPDXLicenseCollection xmlns="http://www.spdx.org/license">
-   <license isOsiApproved="true" licenseId="APSL-1.1"
+   <license kind="APSL" restrictions="weak-copyleft|patent-grant|choice-of-venue|source-disclosure" isOsiApproved="true" licenseId="APSL-1.1"
             name="Apple Public Source License 1.1">
       <crossRefs>
          <crossRef>http://www.opensource.apple.com/source/IOSerialFamily/IOSerialFamily-7/APPLE_LICENSE</crossRef>

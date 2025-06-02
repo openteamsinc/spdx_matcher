@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <SPDXLicenseCollection xmlns="http://www.spdx.org/license">
-   <license isOsiApproved="false" licenseId="Sendmail-Open-Source-1.1"
+   <license kind="Sendmail" restrictions="" isOsiApproved="false" licenseId="Sendmail-Open-Source-1.1"
    name="Sendmail Open Source License v1.1" listVersionAdded="3.26.0">
       <crossRefs>
          <crossRef>https://github.com/trusteddomainproject/OpenDMARC/blob/master/LICENSE.Sendmail</crossRef>

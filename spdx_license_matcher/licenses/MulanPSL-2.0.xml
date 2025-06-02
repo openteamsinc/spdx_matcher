@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <SPDXLicenseCollection xmlns="http://www.spdx.org/license">
-   <license isOsiApproved="true" licenseId="MulanPSL-2.0" name="Mulan Permissive Software License, Version 2" listVersionAdded="3.9">
+   <license kind="MulanPSL" restrictions="patent-grant" isOsiApproved="true" licenseId="MulanPSL-2.0" name="Mulan Permissive Software License, Version 2" listVersionAdded="3.9">
       <crossRefs>
          <crossRef>https://license.coscl.org.cn/MulanPSL2</crossRef>
       </crossRefs>

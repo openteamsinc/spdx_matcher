@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <SPDXLicenseCollection xmlns="http://www.spdx.org/license">
-   <license isOsiApproved="true" licenseId="LPL-1.02" name="Lucent Public License v1.02">
+   <license kind="LPL" restrictions="" isOsiApproved="true" licenseId="LPL-1.02" name="Lucent Public License v1.02">
       <crossRefs>
          <crossRef>http://plan9.bell-labs.com/plan9/license.html</crossRef>
          <crossRef>https://opensource.org/licenses/LPL-1.02</crossRef>

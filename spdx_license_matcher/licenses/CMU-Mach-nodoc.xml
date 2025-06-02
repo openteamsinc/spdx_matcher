@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <SPDXLicenseCollection xmlns="http://www.spdx.org/license">
-   <license isOsiApproved="false" licenseId="CMU-Mach-nodoc" name="CMU
+   <license kind="CMU" restrictions="" isOsiApproved="false" licenseId="CMU-Mach-nodoc" name="CMU
    Mach - no notices-in-documentation variant" listVersionAdded="3.23">
       <crossRefs>
          <crossRef>https://github.com/krb5/krb5/blob/krb5-1.21.2-final/NOTICE#L718-L728</crossRef>

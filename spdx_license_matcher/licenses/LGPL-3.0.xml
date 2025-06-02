@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <SPDXLicenseCollection xmlns="http://www.spdx.org/license">
-  <license licenseId="LGPL-3.0" isOsiApproved="true"
+  <license kind="LGPL" restrictions="library-copyleft|source-disclosure" licenseId="LGPL-3.0" isOsiApproved="true"
   name="GNU Lesser General Public License v3.0 only"
   deprecatedVersion="3.0">
     <obsoletedBys>

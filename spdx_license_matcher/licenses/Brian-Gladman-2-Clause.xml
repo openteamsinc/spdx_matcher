@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <SPDXLicenseCollection xmlns="http://www.spdx.org/license">
-   <license isOsiApproved="false" licenseId="Brian-Gladman-2-Clause"
+   <license kind="Brian" restrictions="" isOsiApproved="false" licenseId="Brian-Gladman-2-Clause"
    name="Brian Gladman 2-Clause License" listVersionAdded="3.23">
       <crossRefs>
          <crossRef>https://github.com/krb5/krb5/blob/krb5-1.21.2-final/NOTICE#L140-L156</crossRef>

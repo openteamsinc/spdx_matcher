@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <SPDXLicenseCollection xmlns="http://www.spdx.org/license">
-   <license isOsiApproved="false" licenseId="LPPL-1.2"
+   <license kind="LPPL" restrictions="" isOsiApproved="false" licenseId="LPPL-1.2"
             name="LaTeX Project Public License v1.2">
       <crossRefs>
          <crossRef>http://www.latex-project.org/lppl/lppl-1-2.txt</crossRef>

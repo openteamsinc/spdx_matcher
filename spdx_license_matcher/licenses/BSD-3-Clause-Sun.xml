@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <SPDXLicenseCollection xmlns="http://www.spdx.org/license">
-  <license isOsiApproved="false" licenseId="BSD-3-Clause-Sun" name="BSD 3-Clause Sun Microsystems">
+  <license kind="BSD" restrictions="" isOsiApproved="false" licenseId="BSD-3-Clause-Sun" name="BSD 3-Clause Sun Microsystems">
     <crossRefs>
     <crossRef>https://github.com/xmlark/msv/blob/b9316e2f2270bc1606952ea4939ec87fbba157f3/xsdlib/src/main/java/com/sun/msv/datatype/regexp/InternalImpl.java</crossRef>
     </crossRefs>
