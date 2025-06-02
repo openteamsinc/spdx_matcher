@@ -1,4 +1,4 @@
-from typing import List, Tuple
+from typing import List
 from functools import lru_cache
 from .base_matcher import LicenseResult, NoMatchError
 from .license_loader import load_licenses
@@ -12,19 +12,27 @@ def load_license_matchers():
     return {k: transform(v) for k, v in licenses.items()}
 
 
-def find_license(text: str, stop_on_perfect=True) -> List[Tuple[str, int]]:
+def find_license(text: str, stop_on_perfect=True) -> List[dict]:
     normalized_text = normalize(text)
     license_matchers = load_license_matchers()
     results = []
 
-    for name, matcher in license_matchers.items():
+    for spdx_id, matcher in license_matchers.items():
         r = LicenseResult(normalized_text)
         try:
             matcher.match(r)
         except NoMatchError:
             continue
         extra_characters = len(r.text)
-        results.append((name, extra_characters))
+        results.append(
+            {
+                "spdx_id": spdx_id,
+                "extra_characters": extra_characters,
+                "restrictions": matcher.restrictions,
+                "name": matcher.name,
+                "kind": matcher.kind,
+            }
+        )
         if extra_characters == 0 and stop_on_perfect:
-            return sorted(results, key=lambda x: x[1])
-    return sorted(results, key=lambda x: x[1])
+            return sorted(results, key=lambda x: x["extra_characters"])
+    return sorted(results, key=lambda x: x["extra_characters"])
