@@ -38,7 +38,11 @@ def copyright_symbol_replacer(text: str) -> str:
     Per SPDX guidelines: "©", "(c)", or "Copyright" should be considered
     equivalent and interchangeable.
     """
-    return re.sub(r"(©|\(c\)|copyright)", "copyright", text)
+    text0 = re.sub(r"(copyright\s*©|copyright\s*\(c\)|copyright)", "copyright", text)
+    # if text != text0:
+    #     print("Changed >>", (text,))
+    #     print("        <<", (text0,))
+    return text0
 
 
 def http_protocol_replacer(text: str) -> str:
@@ -98,6 +102,22 @@ def separator_replacer(text: str) -> str:
     return "\n".join(_separator_replacer_line(line) for line in text.splitlines())
 
 
+def unbox(text: str) -> str:
+    """Remove text boxing characters.
+    eg
+    ***********
+    * Hello   *
+    * World   *
+    ***********
+    """
+
+    def _unbox_line(line: str) -> str:
+        # Remove leading and trailing asterisks and spaces
+        return re.sub(r"^\s*\*+\s+(.*)\s+\*+\s*$", r"\1", line).strip()
+
+    return "\n".join(_unbox_line(line) for line in text.splitlines())
+
+
 def whitespace_replacer(text: str) -> str:
     paragraphs = re.split(r"\n\s*\n+", text)
     # Clean whitespace within each paragraph
@@ -129,6 +149,7 @@ def normalize(text: str, bullets=False) -> str:
 
     text = text.lower()
 
+    text = unbox(text)
     text = punctuation_replacer(text)
     text = punctuation_normalizer(text)
     text = separator_replacer(text)

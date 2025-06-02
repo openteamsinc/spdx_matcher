@@ -8,6 +8,9 @@
       </crossRefs>
       <notes>Note  for matching purposes, this license contains a number of equivalent variations, particularly in the third clause. See the XML file for more details. Also note that the Eclipse Distribution License - v 1.0 (EDL 1.0) is a match to BSD-3-Clause, even though it uses a different name.</notes>
     <text>
+      <titleText>
+         <p>BSD 3-Clause license</p>
+      </titleText>
       <copyrightText>
         <p>Copyright (c) &lt;year&gt; &lt;owner&gt;. </p>
       </copyrightText>

@@ -15,14 +15,10 @@ all_ids = {os.path.splitext(f)[0] for f in os.listdir("spdx_license_matcher/lice
 expected_failures = (
     {
         "MPEG-SSG",
-        "MPL-2.0-no-copyleft-exception",
-        "NASA-1.3",
         "TPL-1.0",
         "URT-RLE",
         "X11-swapped",
         "checkmk",
-        "copyleft-next-0.3.0",
-        "copyleft-next-0.3.1",
     }
     | {  # ?? wrong
         "MIT-testregex",
@@ -34,7 +30,6 @@ expected_failures = (
     | {  # some type of line prefix in text file
         "ssh-keyscan",
         "mpi-permissive",
-        "MPL-2.0",
         "SSH-OpenSSH",
     }
 )

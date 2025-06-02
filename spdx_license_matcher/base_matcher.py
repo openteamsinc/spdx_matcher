@@ -47,6 +47,7 @@ class LicenseResult:
         self.text = self.text.strip()
 
     def trim_remaining(self):
+        self.rewind()
         self.text = self.text.strip()
         # if text only contains non letter characters
         if not re.search(r"[a-zA-Z]", self.text):
@@ -56,7 +57,7 @@ class LicenseResult:
     def rewind(self):
 
         skipped = "\n".join(self.skipped)
-        log.info(f"Rewinding text:\n\t{skipped!r}")
+        log.debug(f"Rewinding text:\n\t{skipped!r}")
         self.text = "\n".join([skipped, self.text])
         self.skipped = []
 
@@ -64,9 +65,9 @@ class LicenseResult:
 
         text = self.text.strip()
         if isinstance(tr, str):
-            log.debug(f"Matching {'optional' if optional else ''} string:\n\t{tr!r}\n\nin text:\n\t{text!r}")
+            log.debug(f"Matching {'optional' if optional else ''} string:\n\t{tr!r}")
             if tr not in text:
-                log.debug("❌ String not found in text")
+                log.debug(f"❌ String not found in text\n\nin text:\n\t{text!r}")
                 if optional:
                     return False
                 raise NoMatchError(f"String {tr!r} not found in text {text!r}")
@@ -90,11 +91,11 @@ class LicenseResult:
         return tr.match(self, optional=optional)
 
     def regex(self, pattern, flags, optional=False) -> bool:
-        log.debug(f"Matching regex:\n\t{pattern!r}\n\nin text:\n\t{self.text!r}")
+        log.debug(f"Matching regex:\n\t{pattern!r}")
         assert isinstance(pattern, str), "Pattern must be a string"
         match = re.search(pattern, self.text, flags)
         if not match:
-            log.debug("❌ Regex not found in text.")
+            log.debug(f"❌ Regex not found in text:\n\t{self.text!r}")
             if optional:
                 return False
             raise NoMatchError(f"Regex {pattern!r} not found in text {self.text!r}")

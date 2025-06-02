@@ -17,11 +17,12 @@
          REPRODUCES, DISTRIBUTES, MODIFIES OR REDISTRIBUTES THE SUBJECT SOFTWARE, AS DEFINED HEREIN, OR ANY
          PART THEREOF, IS, BY THAT ACTION, ACCEPTING IN FULL THE RESPONSIBILITIES AND OBLIGATIONS CONTAINED IN
          THIS AGREEMENT.</p>
-      <p>Government Agency: <alt match=".+" name="governmentAgency">_______________</alt></p>
-      <p>Government Agency Original Software Designation: <alt match=".+" name="governmentAgencyOriginalSoftwareDesignation">_______________</alt></p>
-      <p>Government Agency Original Software Title: <alt match=".+" name="governmentAgencyOriginalSoftwareTitle">_______________</alt></p>
-      <p>User Registration Requested. Please Visit <alt match=".+" name="userRegistrationWebsite1">http://_______________</alt></p>
-      <p>Government Agency Point of Contact for Original Software: <alt match=".+" name="governmentAgencyPointOfContact1">_______________</alt></p>
+      <p>Government Agency: <alt match=".+" name="governmentAgency">_______________</alt>
+      Government Agency Original Software Designation: <alt match=".+" name="governmentAgencyOriginalSoftwareDesignation">_______________</alt>
+      Government Agency Original Software Title: <alt match=".+" name="governmentAgencyOriginalSoftwareTitle">_______________</alt>
+      User Registration Requested. Please Visit <alt match=".+" name="userRegistrationWebsite1">http://_______________</alt>
+      Government Agency Point of Contact for Original Software: <alt match=".+" name="governmentAgencyPointOfContact1">_______________</alt>
+      </p>
       <list>
 
         <item>

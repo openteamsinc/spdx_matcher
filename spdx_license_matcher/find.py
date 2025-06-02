@@ -23,16 +23,17 @@ def find_license(text: str, stop_on_perfect=True) -> List[dict]:
             matcher.match(r)
         except NoMatchError:
             continue
-        extra_characters = len(r.text)
+
         results.append(
             {
                 "spdx_id": spdx_id,
-                "extra_characters": extra_characters,
+                "extra_characters": r.text,
                 "restrictions": matcher.restrictions,
                 "name": matcher.name,
                 "kind": matcher.kind,
+                "is_osi_approved": matcher.is_osi_approved,
             }
         )
-        if extra_characters == 0 and stop_on_perfect:
-            return sorted(results, key=lambda x: x["extra_characters"])
-    return sorted(results, key=lambda x: x["extra_characters"])
+        if len(r.text) == 0 and stop_on_perfect:
+            return sorted(results, key=lambda x: len(x["extra_characters"]))
+    return sorted(results, key=lambda x: len(x["extra_characters"]))
