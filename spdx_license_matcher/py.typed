@@ -1,0 +1,5 @@
+packages = [
+  {include = "spdx_license_matcher"},
+  {include = "spdx_license_matcher/licenses"},
+  {include = "pixelmatch/py.typed"},
+]
