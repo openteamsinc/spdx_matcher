@@ -1,0 +1,50 @@
+name: Publish
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  version-check:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Check version is greater than main
+        run: |
+          # Get version from current branch
+          current_version=$(python -c "import tomllib; print(tomllib.load(open('pyproject.toml', 'rb'))['project']['version'])")
+
+          # Get version from main branch
+          git checkout origin/main -- pyproject.toml
+          main_version=$(python -c "import tomllib; print(tomllib.load(open('pyproject.toml', 'rb'))['project']['version'])")
+
+          echo "Current version: $current_version"
+          echo "Main version: $main_version"
+
+          # Install packaging for version comparison
+          python -m pip install packaging
+
+          # Compare versions using packaging.version
+          python -c "
+          from packaging import version
+          import sys
+
+          current = version.parse('$current_version')
+          main = version.parse('$main_version')
+
+          if current <= main:
+              print(f'Error: Current version ({current}) must be greater than main branch version ({main})')
+              sys.exit(1)
+          else:
+              print(f'Version check passed: {current} > {main}')
+          "
