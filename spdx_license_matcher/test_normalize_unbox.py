@@ -33,8 +33,7 @@ Another normal line
         ("*** Hello World ***", "Hello World", "multiple_asterisks"),
         # Leading/trailing spaces
         (
-            """   * Hello *   
-  ** World **  """,
+            "   * Hello *   \n** World **  ",
             "Hello\nWorld",
             "leading_trailing_spaces",
         ),
