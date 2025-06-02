@@ -1,5 +1,5 @@
 <SPDXLicenseCollection xmlns="http://www.spdx.org/license">
-    <license isOsiApproved="false" licenseId="BSD-Systemics" listVersionAdded="3.22" name="Systemics BSD variant license">
+    <license kind="BSD" restrictions="" isOsiApproved="false" licenseId="BSD-Systemics" listVersionAdded="3.22" name="Systemics BSD variant license">
         <crossRefs>
             <crossRef>https://metacpan.org/release/DPARIS/Crypt-DES-2.07/source/COPYRIGHT</crossRef>
         </crossRefs>

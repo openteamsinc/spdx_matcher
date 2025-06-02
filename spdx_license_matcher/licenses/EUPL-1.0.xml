@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <SPDXLicenseCollection xmlns="http://www.spdx.org/license">
-   <license isOsiApproved="false" licenseId="EUPL-1.0"
+   <license kind="EUPL" restrictions="file-copyleft|network-provisions" isOsiApproved="false" licenseId="EUPL-1.0"
             name="European Union Public License 1.0">
       <crossRefs>
          <crossRef>http://ec.europa.eu/idabc/en/document/7330.html</crossRef>

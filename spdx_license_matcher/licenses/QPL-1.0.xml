@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <SPDXLicenseCollection xmlns="http://www.spdx.org/license">
-   <license isOsiApproved="true" licenseId="QPL-1.0" name="Q Public License 1.0">
+   <license kind="QPL" restrictions="modification-disclosure|commercial-restrictions|choice-of-venue" isOsiApproved="true" licenseId="QPL-1.0" name="Q Public License 1.0">
       <crossRefs>
          <crossRef>http://doc.qt.nokia.com/3.3/license.html</crossRef>
          <crossRef>https://opensource.org/licenses/QPL-1.0</crossRef>

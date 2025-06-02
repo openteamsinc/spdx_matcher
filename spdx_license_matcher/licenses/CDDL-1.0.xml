@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <SPDXLicenseCollection xmlns="http://www.spdx.org/license">
-   <license isOsiApproved="true" licenseId="CDDL-1.0"
+   <license kind="CDDL" restrictions="file-copyleft|patent-grant" isOsiApproved="true" licenseId="CDDL-1.0"
             name="Common Development and Distribution License 1.0">
       <crossRefs>
          <crossRef>https://opensource.org/licenses/cddl1</crossRef>

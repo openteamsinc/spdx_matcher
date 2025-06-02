@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <SPDXLicenseCollection xmlns="http://www.spdx.org/license">
-   <license isOsiApproved="false" licenseId="Unlicense-libwhirlpool"
+   <license kind="Unlicense" restrictions="" isOsiApproved="false" licenseId="Unlicense-libwhirlpool"
    name="Unlicense - libwhirlpool variant" listVersionAdded="3.27.0">
       <crossRefs>
          <crossRef>https://github.com/dfateyev/libwhirlpool/blob/master/README#L27</crossRef>

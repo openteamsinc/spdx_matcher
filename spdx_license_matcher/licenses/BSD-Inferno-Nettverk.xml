@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <SPDXLicenseCollection xmlns="http://www.spdx.org/license">
-   <license isOsiApproved="false" licenseId="BSD-Inferno-Nettverk"
+   <license kind="BSD" restrictions="" isOsiApproved="false" licenseId="BSD-Inferno-Nettverk"
    name="BSD-Inferno-Nettverk" listVersionAdded="3.22">
       <crossRefs>
          <crossRef>https://www.inet.no/dante/LICENSE</crossRef>

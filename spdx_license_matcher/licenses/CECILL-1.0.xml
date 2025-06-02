@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <SPDXLicenseCollection xmlns="http://www.spdx.org/license">
-   <license isOsiApproved="false" licenseId="CECILL-1.0"
+   <license kind="CECILL" restrictions="derivative-work-copyleft|choice-of-venue|source-disclosure" isOsiApproved="false" licenseId="CECILL-1.0"
             name="CeCILL Free Software License Agreement v1.0">
       <crossRefs>
          <crossRef>http://www.cecill.info/licences/Licence_CeCILL_V1-fr.html</crossRef>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <SPDXLicenseCollection xmlns="http://www.spdx.org/license">
-   <license isOsiApproved="false" licenseId="Linux-man-pages-copyleft-var"
+   <license kind="Linux" restrictions="" isOsiApproved="false" licenseId="Linux-man-pages-copyleft-var"
    name="Linux man-pages Copyleft Variant" listVersionAdded="3.21">
       <crossRefs>
          <crossRef>https://git.kernel.org/pub/scm/docs/man-pages/man-pages.git/tree/man2/set_mempolicy.2#n5</crossRef>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <SPDXLicenseCollection xmlns="http://www.spdx.org/license">
-        <license isOsiApproved="false" licenseId="SAX-PD-2.0" name="Sax Public Domain Notice 2.0"       listVersionAdded="3.23">
+        <license kind="SAX" restrictions="" isOsiApproved="false" licenseId="SAX-PD-2.0" name="Sax Public Domain Notice 2.0"       listVersionAdded="3.23">
                 <crossRefs>
                         <crossRef>
                                 http://www.saxproject.org/copying.html

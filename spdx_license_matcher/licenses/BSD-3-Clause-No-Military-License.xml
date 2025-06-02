@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <SPDXLicenseCollection xmlns="http://www.spdx.org/license">
-   <license isOsiApproved="false" licenseId="BSD-3-Clause-No-Military-License"
+   <license kind="BSD" restrictions="" isOsiApproved="false" licenseId="BSD-3-Clause-No-Military-License"
    name="BSD 3-Clause No Military License" listVersionAdded="3.13">
       <crossRefs>
           <crossRef>https://gitlab.syncad.com/hive/dhive/-/blob/master/LICENSE</crossRef>

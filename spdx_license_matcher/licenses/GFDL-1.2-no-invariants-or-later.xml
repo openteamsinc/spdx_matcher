@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <SPDXLicenseCollection xmlns="http://www.spdx.org/license">
-  <license licenseId="GFDL-1.2-no-invariants-or-later" isOsiApproved="false"
+  <license kind="GFDL" restrictions="" licenseId="GFDL-1.2-no-invariants-or-later" isOsiApproved="false"
   name="GNU Free Documentation License v1.2 or later - no invariants">
     <crossRefs>
       <crossRef>https://www.gnu.org/licenses/old-licenses/fdl-1.2.txt</crossRef>

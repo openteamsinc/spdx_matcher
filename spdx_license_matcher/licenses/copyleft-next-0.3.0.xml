@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <SPDXLicenseCollection xmlns="http://www.spdx.org/license">
-   <license isOsiApproved="false" licenseId="copyleft-next-0.3.0" name="copyleft-next 0.3.0" listVersionAdded="3.4">
+   <license kind="copyleft" restrictions="" isOsiApproved="false" licenseId="copyleft-next-0.3.0" name="copyleft-next 0.3.0" listVersionAdded="3.4">
       <crossRefs>
          <crossRef>https://github.com/copyleft-next/copyleft-next/blob/master/Releases/copyleft-next-0.3.0</crossRef>
       </crossRefs>

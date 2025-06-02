@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <SPDXLicenseCollection xmlns="http://www.spdx.org/license">
-   <license isOsiApproved="false" licenseId="Artistic-dist"
+   <license kind="Artistic" restrictions="" isOsiApproved="false" licenseId="Artistic-dist"
    name="Artistic License 1.0 (dist)" listVersionAdded="3.27.0">
       <crossRefs>
          <crossRef>https://github.com/pexip/os-perl/blob/833cf4c86cc465ccfc627ff16db67e783156a248/debian/copyright#L2720-L2845</crossRef>

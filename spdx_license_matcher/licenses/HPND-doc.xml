@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <SPDXLicenseCollection xmlns="http://www.spdx.org/license">
-   <license isOsiApproved="false" licenseId="HPND-doc"
+   <license kind="HPND" restrictions="" isOsiApproved="false" licenseId="HPND-doc"
    name="Historical Permission Notice and Disclaimer - documentation variant" listVersionAdded="3.22">
       <crossRefs>
          <crossRef>https://gitlab.freedesktop.org/xorg/lib/libxext/-/blob/master/COPYING?ref_type=heads#L185-197</crossRef>

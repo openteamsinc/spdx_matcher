@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <SPDXLicenseCollection xmlns="http://www.spdx.org/license">
-   <license isOsiApproved="false" licenseId="Sendmail-8.23" name="Sendmail License 8.23">
+   <license kind="Sendmail" restrictions="" isOsiApproved="false" licenseId="Sendmail-8.23" name="Sendmail License 8.23">
       <crossRefs>
          <crossRef>https://www.proofpoint.com/sites/default/files/sendmail-license.pdf</crossRef>
          <crossRef>https://web.archive.org/web/20181003101040/https://www.proofpoint.com/sites/default/files/sendmail-license.pdf</crossRef>

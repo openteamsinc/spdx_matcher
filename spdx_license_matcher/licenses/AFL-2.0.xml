@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <SPDXLicenseCollection xmlns="http://www.spdx.org/license">
-   <license isOsiApproved="true" licenseId="AFL-2.0" name="Academic Free License v2.0">
+   <license kind="AFL" restrictions="network-copyleft|express-acceptance|choice-of-venue|external-deployment" isOsiApproved="true" licenseId="AFL-2.0" name="Academic Free License v2.0">
       <crossRefs>
          <crossRef>http://wayback.archive.org/web/20060924134533/http://www.opensource.org/licenses/afl-2.0.txt</crossRef>
       </crossRefs>

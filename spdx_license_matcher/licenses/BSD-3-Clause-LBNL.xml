@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <SPDXLicenseCollection xmlns="http://www.spdx.org/license">
-   <license isOsiApproved="true" licenseId="BSD-3-Clause-LBNL"
+   <license kind="BSD" restrictions="" isOsiApproved="true" licenseId="BSD-3-Clause-LBNL"
             name="Lawrence Berkeley National Labs BSD variant license" listVersionAdded="1.20">
       <crossRefs>
          <crossRef>https://fedoraproject.org/wiki/Licensing/LBNLBSD</crossRef>

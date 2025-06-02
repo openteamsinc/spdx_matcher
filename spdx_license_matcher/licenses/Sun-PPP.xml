@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <SPDXLicenseCollection xmlns="http://www.spdx.org/license">
-   <license isOsiApproved="false" licenseId="Sun-PPP"
+   <license kind="Sun" restrictions="" isOsiApproved="false" licenseId="Sun-PPP"
    name="Sun PPP License" listVersionAdded="3.23">
       <crossRefs>
          <crossRef>https://github.com/ppp-project/ppp/blob/master/pppd/eap.c#L7-L16</crossRef>

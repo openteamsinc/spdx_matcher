@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <SPDXLicenseCollection xmlns="http://www.spdx.org/license">
-   <license isOsiApproved="true" licenseId="AFL-2.1" name="Academic Free License v2.1">
+   <license kind="AFL" restrictions="network-copyleft|express-acceptance|choice-of-venue|external-deployment" isOsiApproved="true" licenseId="AFL-2.1" name="Academic Free License v2.1">
       <crossRefs>
          <crossRef>http://opensource.linux-mirror.org/licenses/afl-2.1.txt</crossRef>
       </crossRefs>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <SPDXLicenseCollection xmlns="http://www.spdx.org/license">
-   <license isOsiApproved="false" licenseId="NIST-PD" name="NIST Public Domain Notice" listVersionAdded="3.10">
+   <license kind="NIST" restrictions="" isOsiApproved="false" licenseId="NIST-PD" name="NIST Public Domain Notice" listVersionAdded="3.10">
       <crossRefs>
         <crossRef>https://github.com/tcheneau/simpleRPL/blob/e645e69e38dd4e3ccfeceb2db8cba05b7c2e0cd3/LICENSE.txt</crossRef>
         <crossRef>https://github.com/tcheneau/Routing/blob/f09f46fcfe636107f22f2c98348188a65a135d98/README.md</crossRef>

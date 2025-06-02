@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <SPDXLicenseCollection xmlns="http://www.spdx.org/license">
-   <license isOsiApproved="false" licenseId="bzip2-1.0.6"
+   <license kind="bzip2" restrictions="" isOsiApproved="false" licenseId="bzip2-1.0.6"
             name="bzip2 and libbzip2 License v1.0.6" listVersionAdded="1.20">
       <crossRefs>
          <crossRef>https://sourceware.org/git/?p=bzip2.git;a=blob;f=LICENSE;hb=bzip2-1.0.6</crossRef>

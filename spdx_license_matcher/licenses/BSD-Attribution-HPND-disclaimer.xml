@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <SPDXLicenseCollection xmlns="http://www.spdx.org/license">
-   <license isOsiApproved="false" licenseId="BSD-Attribution-HPND-disclaimer"
+   <license kind="BSD" restrictions="" isOsiApproved="false" licenseId="BSD-Attribution-HPND-disclaimer"
    name="BSD with Attribution and HPND disclaimer" listVersionAdded="3.20">
       <crossRefs>
 	      <crossRef>https://github.com/cyrusimap/cyrus-sasl/blob/master/COPYING</crossRef>

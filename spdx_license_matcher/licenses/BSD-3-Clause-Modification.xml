@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <SPDXLicenseCollection xmlns="http://www.spdx.org/license">
-   <license isOsiApproved="false" licenseId="BSD-3-Clause-Modification" name="BSD 3-Clause Modification" listVersionAdded="3.12">
+   <license kind="BSD" restrictions="" isOsiApproved="false" licenseId="BSD-3-Clause-Modification" name="BSD 3-Clause Modification" listVersionAdded="3.12">
       <crossRefs>
          <crossRef>https://fedoraproject.org/wiki/Licensing:BSD#Modification_Variant</crossRef>
       </crossRefs>

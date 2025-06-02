@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <SPDXLicenseCollection xmlns="http://www.spdx.org/license">
-	<license isOsiApproved="false" licenseId="MIT-Wu" name="MIT Tom Wu Variant"
+	<license kind="MIT" restrictions="" isOsiApproved="false" licenseId="MIT-Wu" name="MIT Tom Wu Variant"
 		listVersionAdded="3.20">
       <crossRefs>
          <crossRef>https://github.com/chromium/octane/blob/master/crypto.js</crossRef>

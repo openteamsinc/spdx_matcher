@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <SPDXLicenseCollection xmlns="http://www.spdx.org/license">
-   <license isOsiApproved="false" licenseId="MIT-Click"
+   <license kind="MIT" restrictions="" isOsiApproved="false" licenseId="MIT-Click"
    name="MIT Click License" listVersionAdded="3.26.0">
       <crossRefs>
          <crossRef>https://github.com/kohler/t1utils/blob/master/LICENSE</crossRef>

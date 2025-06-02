@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <SPDXLicenseCollection xmlns="http://www.spdx.org/license">
-   <license isOsiApproved="true" licenseId="MPL-2.0-no-copyleft-exception"
+   <license kind="MPL" restrictions="file-copyleft|patent-grant" isOsiApproved="true" licenseId="MPL-2.0-no-copyleft-exception"
       name="Mozilla Public License 2.0 (no copyleft exception)">
       <crossRefs>
          <crossRef>https://www.mozilla.org/MPL/2.0/</crossRef>
