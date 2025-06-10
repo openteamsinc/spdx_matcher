@@ -1,9 +1,10 @@
-from dataclasses import dataclass, replace, field
-from typing import List, Optional, Any
 import logging
 import re
-from .base_matcher import LicenseResult, BaseMatcher, TransformResult
-from .matcher_utils import to_dict, is_empty
+from dataclasses import dataclass, field, replace
+from typing import Any, List, Optional
+
+from .base_matcher import BaseMatcher, LicenseResult, TransformResult
+from .matcher_utils import is_empty, to_dict
 from .regex_matcher import RegexMatcher, assemble_regex_parts
 
 log = logging.getLogger(__name__)
@@ -59,6 +60,8 @@ class Matcher(BaseMatcher):
 
     def simplify(self):
         parts = [part for part in self.parts if not is_empty(part)]
+        if len(parts) == 1 and type(parts[0]) is Matcher:
+            parts = parts[0].parts
         return replace(self, parts=parts)
 
     def is_empty(self):
@@ -68,6 +71,15 @@ class Matcher(BaseMatcher):
 @dataclass
 class ListMatcher(Matcher):
     pass
+
+
+@dataclass
+class TitleMatcher(Matcher):
+
+    def match(self, result: LicenseResult, optional: bool) -> bool:
+        if len(self.parts) == 1 and isinstance(self.parts[0], str):
+            return result.match_and_consume_line(self.parts[0], optional=True)
+        return super().match(result, optional)
 
 
 @dataclass
