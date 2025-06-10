@@ -98,7 +98,7 @@ class OptionalMatcher(Matcher):
         other = super().simplify()
         if len(other.parts) == 1 and isinstance(other.parts[0], str):
             pattern = re.escape(other.parts[0])
-            return RegexMatcher(xpath=self.xpath, regex=f"({pattern})?")
+            return RegexMatcher(xpath=self.xpath, regex=pattern, optional=True)
         return other
 
 

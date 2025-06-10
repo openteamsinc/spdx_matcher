@@ -224,4 +224,3 @@ def transform(element: Element, transformer: Optional[XMLToRegexTransformer] = N
     t = transformer.transform(element)
     assert isinstance(t, LicenseMatcher), "Transformed result should be a LicenseMatcher"
     return t
-    return t

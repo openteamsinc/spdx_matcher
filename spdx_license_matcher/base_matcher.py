@@ -112,16 +112,16 @@ class LicenseResult:
 
         match = re.search(pattern, self.text, flags)
         # prevent matching empty strings
-        is_empty_match = match and match.group(0) == ""
-        if is_empty_match and pattern.startswith("((") and pattern.endswith(")?)"):
-            log.debug("Empty match found, removing optional pattern and trying again")
-            optional = True
-            pattern = pattern[2:-3]
-            try:
-                match = re.search(pattern, self.text, flags)
-            except re.error as e:
-                log.debug(f"Regex error: {e}")
-                match = None
+        # is_empty_match = match and match.group(0) == ""
+        # if is_empty_match and pattern.startswith("((") and pattern.endswith(")?)"):
+        #     log.debug("Empty match found, removing optional pattern and trying again")
+        #     optional = True
+        #     pattern = pattern[2:-3]
+        #     try:
+        #         match = re.search(pattern, self.text, flags)
+        #     except re.error as e:
+        #         log.debug(f"Regex error: {e}")
+        #         match = None
 
         if not match:
             log.debug(f"❌ Regex not found in text:\n\t{self.text!r}")
