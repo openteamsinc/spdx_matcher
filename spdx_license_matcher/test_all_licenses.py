@@ -2,13 +2,15 @@
 Test license XML to text matching for all available licenses.
 """
 
-import pytest
 import os
+
+import pytest
 from lxml import etree
-from .transformer import XMLToRegexTransformer
+
+from .base_matcher import LicenseResult, NoMatchError
 from .matchers import LicenseMatcher
-from .base_matcher import NoMatchError, LicenseResult
 from .normalize import normalize
+from .transformer import XMLToRegexTransformer
 
 all_ids = {os.path.splitext(f)[0] for f in os.listdir("spdx_license_matcher/licenses/") if f.endswith(".xml")}
 
@@ -23,8 +25,6 @@ expected_failures = (
     | {  # ?? wrong
         "MIT-testregex",
         "CC-BY-NC-SA-2.0-DE",
-        "LPPL-1.3c",
-        "LPPL-1.3a",
         "CC-BY-NC-ND-3.0-IGO",
     }
     | {  # some type of line prefix in text file

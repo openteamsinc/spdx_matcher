@@ -1,10 +1,11 @@
-from dataclasses import dataclass, replace, field
-from typing import List, Optional, Any
 import logging
 import re
-from .base_matcher import LicenseResult, BaseMatcher, TransformResult
-from .matcher_utils import to_dict, is_empty
-from .regex_matcher import RegexMatcher, assemble_regex_parts
+from dataclasses import dataclass, field, replace
+from typing import Any, List, Optional
+
+from .base_matcher import BaseMatcher, LicenseResult, TransformResult
+from .matcher_utils import is_empty, to_dict
+from .regex_matcher import RegexMatcher, merge_regex_parts
 
 log = logging.getLogger(__name__)
 
@@ -41,7 +42,7 @@ class Matcher(BaseMatcher):
         parts = list(self.parts)
         while parts:
             part = parts.pop(0)
-            part = assemble_regex_parts(part, parts)
+            # part = assemble_regex_parts(part, parts)
             did_match = result.match(part, optional=optional)
             if not optional and not did_match:
 
@@ -59,6 +60,10 @@ class Matcher(BaseMatcher):
 
     def simplify(self):
         parts = [part for part in self.parts if not is_empty(part)]
+        if len(parts) == 1 and type(parts[0]) is Matcher:
+            parts = parts[0].parts
+
+        parts = merge_regex_parts(parts)
         return replace(self, parts=parts)
 
     def is_empty(self):
@@ -68,6 +73,15 @@ class Matcher(BaseMatcher):
 @dataclass
 class ListMatcher(Matcher):
     pass
+
+
+@dataclass
+class TitleMatcher(Matcher):
+
+    def match(self, result: LicenseResult, optional: bool) -> bool:
+        if len(self.parts) == 1 and isinstance(self.parts[0], str):
+            return result.match_and_consume_line(self.parts[0], optional=True)
+        return super().match(result, optional)
 
 
 @dataclass
@@ -86,7 +100,7 @@ class OptionalMatcher(Matcher):
         other = super().simplify()
         if len(other.parts) == 1 and isinstance(other.parts[0], str):
             pattern = re.escape(other.parts[0])
-            return RegexMatcher(xpath=self.xpath, regex=f"({pattern})?")
+            return RegexMatcher(xpath=self.xpath, regex=pattern, optional=True)
         return other
 
 

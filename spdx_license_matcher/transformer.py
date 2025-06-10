@@ -1,16 +1,18 @@
 import re
+from typing import List, Optional
 
 from lxml.etree import _Element as Element
-from typing import Optional, List
+
 from .matchers import (
-    Matcher,
+    BaseMatcher,
+    BulletMatcher,
     LicenseMatcher,
-    TransformResult,
     ListMatcher,
+    Matcher,
     OptionalMatcher,
     RegexMatcher,
-    BulletMatcher,
-    BaseMatcher,
+    TitleMatcher,
+    TransformResult,
 )
 from .normalize import normalize
 
@@ -118,7 +120,7 @@ class XMLToRegexTransformer:
         return LicenseMatcher(title=title, copyright=copyright, parts=parts, xpath=make_xpath(element))
 
     def _transform_titleText(self, element: Element) -> Matcher:
-        parts: List[TransformResult] = [RegexMatcher(regex=r"^(\s*[#*]\s*)?", xpath="")]
+        parts: List[TransformResult] = []
         if element.text:
             r = normalize(element.text.strip())
             parts.append(r)
@@ -128,7 +130,7 @@ class XMLToRegexTransformer:
             if text:
                 parts.append(text)
 
-        return Matcher(parts=parts, xpath=make_xpath(element))
+        return TitleMatcher(parts=parts, xpath=make_xpath(element))
 
     def _transform_copyrightText(self, element: Element) -> TransformResult:
         parts: List[TransformResult] = []
@@ -136,6 +138,7 @@ class XMLToRegexTransformer:
             text = self.transform(child)
             if text:
                 parts.append(text)
+        # Match anything ... not used in license
         return RegexMatcher(regex=r".*", xpath=make_xpath(element), flags=re.IGNORECASE | re.MULTILINE)
 
     def _transform_list(self, element: Element) -> ListMatcher:
@@ -196,7 +199,7 @@ class XMLToRegexTransformer:
         tag = child.tag.split("}")[-1] if "}" in child.tag else child.tag
         assert tag == "license", "Child of SPDXLicenseCollection should be a license element"
         result = self.transform(child)
-        assert isinstance(result, LicenseMatcher), "Result should be a LicenseMatcher"
+        assert isinstance(result, LicenseMatcher), f"Result should be a LicenseMatcher (got {type(result)})"
         return result
 
     def _transform_license(self, element: Element) -> LicenseMatcher:
@@ -207,7 +210,7 @@ class XMLToRegexTransformer:
         child = children[child_tags.index("text")]
 
         result = self.transform(child)
-        assert isinstance(result, LicenseMatcher), "Result should be a LicenseMatcher"
+        assert isinstance(result, LicenseMatcher), f"Result should be a LicenseMatcher (got {type(result)})"
         result.name = str(element.attrib.get("name"))
         result.kind = element.attrib.get("kind")
         result.restrictions = [r for r in element.attrib.get("restrictions", "").split("|") if r.strip()]

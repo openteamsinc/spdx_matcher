@@ -1,14 +1,16 @@
-import click
+import logging
 import sys
 import textwrap
-import logging
-from lxml import etree
 from pathlib import Path
-from .transformer import XMLToRegexTransformer
+from pprint import pprint
+
+import click
+from lxml import etree
+
+from .find import find_license
 from .matchers import LicenseMatcher, LicenseResult
 from .normalize import normalize as normalize_fn
-from .find import find_license
-from pprint import pprint
+from .transformer import XMLToRegexTransformer
 
 
 def pretty_print_result(result, indent=0):
@@ -66,7 +68,7 @@ def normalize(license_file):
 @cli.command()
 @click.argument("template_xml", type=click.Path(exists=True, path_type=Path))
 @click.argument("license_file", type=click.Path(exists=True, path_type=Path))
-def match_license(template_xml, license_file):
+def match(template_xml, license_file):
     """Match a license text against an SPDX template.
 
     Args:
@@ -150,5 +152,7 @@ def find(license_file: str, best=False) -> None:
             return
 
 
+if __name__ == "__main__":
+    cli()
 if __name__ == "__main__":
     cli()

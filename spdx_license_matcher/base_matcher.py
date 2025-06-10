@@ -1,8 +1,7 @@
-from dataclasses import dataclass
-from typing import Union, Any, List
 import logging
 import re
-
+from dataclasses import dataclass
+from typing import Any, List, Union
 
 log = logging.getLogger(__name__)
 
@@ -90,9 +89,27 @@ class LicenseResult:
 
         return tr.match(self, optional=optional)
 
+    def match_and_consume_line(self, tr: TransformResult, optional=True) -> bool:
+        text = self.text.strip()
+        lines = text.splitlines()
+        assert isinstance(tr, str), f"tr must be a string for match_and_consume_line (got {type(tr)})"
+        log.debug(f"Matching {'optional' if optional else ''} string line:\n\t{tr!r}")
+        for i, line in enumerate(lines):
+            if tr in line:
+                log.debug("✅ String found, removing entire line from text")
+                result = lines[:i] + lines[i + 1 :]
+                self.text = "\n".join(result).strip()
+                return True
+
+        log.debug(f"❌ String not found in text\n\nin text:\n\t{text!r}")
+        if optional:
+            return False
+        raise NoMatchError(f"String {tr!r} not found in text {text!r}")
+
     def regex(self, pattern, flags, optional=False) -> bool:
         log.debug(f"Matching regex:\n\t{pattern!r}")
         assert isinstance(pattern, str), "Pattern must be a string"
+
         match = re.search(pattern, self.text, flags)
         if not match:
             log.debug(f"❌ Regex not found in text:\n\t{self.text!r}")
