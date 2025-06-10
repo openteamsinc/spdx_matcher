@@ -5,7 +5,7 @@ from typing import Any, List, Optional
 
 from .base_matcher import BaseMatcher, LicenseResult, TransformResult
 from .matcher_utils import is_empty, to_dict
-from .regex_matcher import RegexMatcher, assemble_regex_parts, merge_regex_parts
+from .regex_matcher import RegexMatcher, merge_regex_parts
 
 log = logging.getLogger(__name__)
 
