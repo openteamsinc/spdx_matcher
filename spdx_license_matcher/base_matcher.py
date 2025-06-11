@@ -112,7 +112,7 @@ class LicenseResult:
 
         match = re.search(pattern, self.text, flags)
         if not match:
-            log.debug(f"❌ Regex not found in text:\n\t{self.text!r}")
+            log.debug(f"{'❓ optional' if optional else '❌'} regex not found in text:\n\t{self.text!r}")
             if optional:
                 return False
             raise NoMatchError(f"Regex {pattern!r} not found in text {self.text!r}")
