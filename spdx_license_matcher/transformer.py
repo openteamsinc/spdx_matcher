@@ -71,7 +71,7 @@ class XMLToRegexTransformer:
     def _transform_alt(self, element: Element) -> RegexMatcher:
         match_pattern = element.get("match")
         assert match_pattern
-        return RegexMatcher(regex=match_pattern, xpath=make_xpath(element))
+        return RegexMatcher(regex=f"({match_pattern})", xpath=make_xpath(element))
 
     def _transform_optional(self, element: Element) -> OptionalMatcher:
         parts: List[TransformResult] = []

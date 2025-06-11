@@ -42,10 +42,8 @@ class Matcher(BaseMatcher):
         parts = list(self.parts)
         while parts:
             part = parts.pop(0)
-            # part = assemble_regex_parts(part, parts)
             did_match = result.match(part, optional=optional)
             if not optional and not did_match:
-
                 return False
 
         result.strip()

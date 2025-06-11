@@ -19,7 +19,10 @@ class RegexMatcher(BaseMatcher):
         }
 
     def match(self, result: LicenseResult, optional: bool = False) -> bool:
-        return result.regex(self.regex, flags=self.flags, optional=optional or self.optional)
+        did_match = result.regex(self.regex, flags=self.flags, optional=optional or self.optional)
+        if self.optional:
+            return True
+        return did_match
 
 
 def regex_string(part: TransformResult) -> Tuple[str, bool, int]:
