@@ -37,8 +37,11 @@
       <p>"Reserved Font Name" refers to any names specified as such after the copyright statement(s).</p>
       <p>"Original Version" refers to the collection of Font Software components as distributed by the Copyright
          Holder(s).</p>
-      <p>"Modified Version" refers to any derivative made by adding to, deleting, or substituting — in part or in
-         whole — any of the components of the Original Version, by changing formats or by porting the Font
+      <p>"Modified Version" refers to any derivative made by adding to, deleting, or substituting 
+         <alt match="--?">—</alt>
+         in part or in whole
+         <alt match="--?">—</alt> 
+         any of the components of the Original Version, by changing formats or by porting the Font
          Software to a new environment.</p>
       <p>"Author" refers to any designer, engineer, programmer, technical writer or other person who contributed
          to the Font Software.</p>
