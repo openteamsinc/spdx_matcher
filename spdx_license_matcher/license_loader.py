@@ -1,8 +1,12 @@
-from lxml.etree import _Element as Element
-from lxml import etree
-from typing import Dict, Optional, Tuple
-from importlib.resources import files
+import logging
 from importlib.abc import Traversable
+from importlib.resources import files
+from typing import Dict, Optional, Tuple
+
+from lxml import etree
+from lxml.etree import _Element as Element
+
+log = logging.getLogger(__name__)
 
 
 def load_license(license_filename: str) -> Element:
@@ -51,6 +55,10 @@ def load_licenses() -> Dict[str, Element]:
 
         license_id, root = load_license_from_traversable(filename)
         if license_id:
+            if license_id in licenses:
+                log.warning(f"Duplicate license ID found: {license_id} in {filename.name}")
             licenses[license_id] = root
+        else:
+            log.warning(f"License ID not found in {filename.name}, skipping.")
 
     return licenses

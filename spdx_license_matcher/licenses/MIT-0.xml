@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <SPDXLicenseCollection xmlns="http://www.spdx.org/license">
-  <license kind="MIT" restrictions="" isOsiApproved="true" licenseId="MIT-0" name="MIT No Attribution">
+   <license isOsiApproved="true" licenseId="MIT-0" name="MIT License">
     <crossRefs>
       <crossRef>https://github.com/aws/mit-0</crossRef>
       <crossRef>https://romanrm.net/mit-zero</crossRef>
@@ -10,31 +10,36 @@
       This license is a modified version of the common MIT license,
       with the attribution paragraph removed.
     </notes>
-    <text>
-      <titleText>
-        <p><alt name="title" match="The MIT-Zero License|MIT No Attribution|">MIT No Attribution</alt></p>
-      </titleText>
-      <copyrightText>
-        <p>
-          Copyright &lt;YEAR&gt; &lt;COPYRIGHT HOLDER&gt;
-        </p>
-      </copyrightText>
+      <text>
+         <titleText>
+            <p>MIT License</p>
+         </titleText>
+         <copyrightText>
+            <p>Copyright (c) &lt;year&gt; &lt;copyright holders&gt;
+            </p>
+         </copyrightText>
 
-      <p>
-        Permission is hereby granted, free of charge, to any person obtaining a copy of this
-        software and associated documentation files (the "Software"), to deal in the Software
-        without restriction, including without limitation the rights to use, copy, modify,
-        merge, publish, distribute, sublicense, and/or sell copies of the Software, and to
-        permit persons to whom the Software is furnished to do so.
-      </p>
-      <p>
-        THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
-        INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
-        PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
-        HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
-        OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
-        SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-      </p>
-    </text>
-  </license>
+         <p>Permission is hereby granted, free of charge, to any person obtaining a copy of <alt
+               match="this\s+software\s+and\s+associated\s+documentation\s+files|this\s+source\s+file"
+               name="files">
+               this software and associated documentation files</alt> (the "<alt
+               match="Software|Materials" name="Software1">Software</alt>"), to deal in the <alt
+               match="Software|Materials" name="Software2">Software</alt> without restriction,
+            including without limitation the rights to use, copy, modify, merge, publish,
+            distribute, sublicense, and/or sell copies of the <alt match="Software|Materials"
+               name="Software3">Software</alt>, and to permit persons to whom the <alt
+               match="Software|Materials" name="Software4">Software</alt> is furnished to do so<optional>,
+            subject to the following conditions:</optional></p>
+
+         <p>THE <alt match="SOFTWARE IS|MATERIALS ARE" name="Software-verb">SOFTWARE IS</alt>
+            PROVIDED <alt match="[*&quot;']">"</alt>AS IS<alt match="[\*&quot;']">"</alt>,
+            WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT
+            LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+            NONINFRINGEMENT. IN NO EVENT SHALL <alt match=".+" name="copyrightHolder">THE AUTHORS OR
+            COPYRIGHT HOLDERS</alt> BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN
+            AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE <alt
+               match="SOFTWARE|MATERIALS" name="Software7">SOFTWARE</alt> OR THE USE OR OTHER
+            DEALINGS IN THE <alt match="SOFTWARE|MATERIALS" name="Software8">SOFTWARE</alt>.</p>
+      </text>
+   </license>
 </SPDXLicenseCollection>

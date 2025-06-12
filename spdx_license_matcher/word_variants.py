@@ -113,6 +113,7 @@ equivalent = [
     ("modeled", "modelled"),
     ("modeling", "modelling"),
     ("noncommercial", "non-commercial"),
+    ("noninfringement", "non-infringement"),
     ("offense", "offence"),
     ("optimize", "optimise"),
     ("organization", "organisation"),

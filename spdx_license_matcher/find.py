@@ -1,9 +1,10 @@
-from typing import List
 from functools import lru_cache
+from typing import List
+
 from .base_matcher import LicenseResult, NoMatchError
 from .license_loader import load_licenses
-from .transformer import transform
 from .normalize import normalize
+from .transformer import transform
 
 
 @lru_cache
