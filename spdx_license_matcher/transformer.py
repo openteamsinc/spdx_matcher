@@ -114,7 +114,7 @@ class XMLToRegexTransformer:
                 parts.append(normalize(child.tail.strip()))
 
         copyright = RegexMatcher(
-            regex=r"^\s*copyright.*", xpath=make_xpath(element), flags=re.IGNORECASE | re.MULTILINE
+            regex=r"^(\s*[#-])\s*copyright.*", xpath=make_xpath(element), flags=re.IGNORECASE | re.MULTILINE
         )
 
         return LicenseMatcher(title=title, copyright=copyright, parts=parts, xpath=make_xpath(element))
