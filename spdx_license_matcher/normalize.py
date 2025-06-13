@@ -1,4 +1,5 @@
 import re
+
 from .word_variants import equivalent
 
 
@@ -97,7 +98,10 @@ def separator_replacer(text: str) -> str:
 
     def _separator_replacer_line(line):
         # Replace any sequence of non-letter characters repeated 3 or more times with a single space
-        return re.sub(r"^([^a-zA-Z0-9\s])\1{3,}", " ", line).strip()
+        line = re.sub(r"^([^a-zA-Z0-9\s])\1{3,}", " ", line).strip()
+        # Pairs of non-letter characters repeated 3 or more times
+        line = re.sub(r"^([^a-zA-Z0-9\s][^a-zA-Z0-9\s])\1{3,}", " ", line).strip()
+        return line
 
     return "\n".join(_separator_replacer_line(line) for line in text.splitlines())
 

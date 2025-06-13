@@ -63,9 +63,9 @@ class XMLToRegexTransformer:
                 parts.append(child_result)
 
             if child.tail:
-
                 tail = normalize(child.tail.strip())
                 parts.append(tail)
+
         return Matcher(parts=parts, xpath=make_xpath(element))
 
     def _transform_alt(self, element: Element) -> RegexMatcher:
@@ -100,35 +100,36 @@ class XMLToRegexTransformer:
             tag = child.tag.split("}")[-1] if "}" in child.tag else child.tag
             child_result = self.transform(child)
 
-            if tag in ["titleText", "copyrightText"]:
-                if tag == "titleText":
-                    title = child_result
-                continue
-            else:
-                # Ignore because we want to match any line starting with copyright
-                # copyright = child_result
-
+            # Ignore copyrightText because we want to match any line starting with copyright
+            if tag not in ["copyrightText"]:
+                # continue
                 parts.append(child_result)
 
             if child.tail:
                 parts.append(normalize(child.tail.strip()))
 
         copyright = RegexMatcher(
-            regex=r"^(\s*[#-])\s*copyright.*", xpath=make_xpath(element), flags=re.IGNORECASE | re.MULTILINE
+            regex=r"^(\s*([#-\*•]))?\s*(copyright|\(c\)|portions copyright|\S+ is copyright|this \S+ is copyright).*",
+            xpath=make_xpath(element),
+            flags=re.IGNORECASE | re.MULTILINE,
         )
 
         return LicenseMatcher(title=title, copyright=copyright, parts=parts, xpath=make_xpath(element))
 
     def _transform_titleText(self, element: Element) -> Matcher:
         parts: List[TransformResult] = []
-        if element.text:
-            r = normalize(element.text.strip())
-            parts.append(r)
-        for child in element:
 
-            text = self.transform(child)
-            if text:
-                parts.append(text)
+        if element.text:
+            parts.append(normalize(element.text.strip()))
+
+        for child in element:
+            child_result = self.transform(child)
+            if child_result:
+                parts.append(child_result)
+
+            if child.tail:
+                tail = normalize(child.tail.strip())
+                parts.append(tail)
 
         return TitleMatcher(parts=parts, xpath=make_xpath(element))
 

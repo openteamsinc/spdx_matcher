@@ -34,6 +34,94 @@ expected_failures = (
     }
 )
 
+is_not_perfect = {
+    "AAL",
+    "Aladdin",
+    "APL-1.0",
+    "ASWF-Digital-Assets-1.1",
+    "bcrypt-Solar-Designer",
+    "Boehm-GC-without-fee",
+    "BSD-Systemics-W3Works",
+    "bzip2-1.0.6",
+    "Catharon",
+    "CC-BY-NC-SA-3.0-IGO",
+    "CDLA-Permissive-1.0",
+    "CDLA-Sharing-1.0",
+    "CECILL-1.1",
+    "CECILL-2.0",
+    "CECILL-2.1",
+    "CECILL-B",
+    "CECILL-C",
+    "COIL-1.0",
+    "Cronyx",
+    "DocBook-DTD",
+    "DocBook-Stylesheet",
+    "dtoa",
+    "EUPL-1.0",
+    "EUPL-1.1",
+    "Fair",
+    "FBM",
+    "FDK-AAC",
+    "FTL",
+    "Game-Programming-Gems",
+    "Glulxe",
+    "GPL-2.0-or-later",
+    "HDF5",
+    "hdparm",
+    "Hippocratic-2.1",
+    "HPND-sell-regexpr",
+    "HPND-sell-variant-MIT-disclaimer",
+    "HPND",
+    "InnoSetup",
+    "JasPer-2.0",
+    "lsof",
+    "MakeIndex",
+    "MIT-CMU",
+    "mpich2",
+    "MPL-1.0",
+    "NBPL-1.0",
+    "Net-SNMP",
+    "NICTA-1.0",
+    "Nokia",
+    "NOSL",
+    "OLDAP-1.1",
+    "OLDAP-1.2",
+    "OLDAP-1.3",
+    "OLDAP-1.4",
+    "OpenPBS-2.3",
+    "PADL",
+    "pnmstitch",
+    "PPL",
+    "psutils",
+    "Python-2.0.1",
+    "Qhull",
+    "RPL-1.1",
+    "SAX-PD-2.0",
+    "SGI-B-1.0",
+    "SOFA",
+    "TORQUE-1.1",
+    "TOSL",
+    "TrustedQSL",
+    "UMich-Merit",
+    "UPL-1.0",
+    "Wsuipa",
+    "XSkat",
+}
+
+
+class NotPerfectMatchError(Exception):
+    pass
+
+
+def make_marks(license_id):
+    if license_id in expected_failures:
+        return [pytest.mark.xfail(reason=f"Known failure for {license_id}", strict=True, raises=NoMatchError)]
+
+    if license_id in is_not_perfect:
+        return [pytest.mark.xfail(reason=f"Perfect failure for {license_id}", strict=True, raises=NotPerfectMatchError)]
+
+    return []
+
 
 class TestAllLicenses:
     """Test license XML to text matching per SPDX guidelines."""
@@ -41,13 +129,9 @@ class TestAllLicenses:
     @pytest.mark.parametrize(
         "license_id",
         [
-            (
-                pytest.param(
-                    license_id,
-                    marks=pytest.mark.xfail(reason=f"Known failure for {license_id}", strict=True, raises=NoMatchError),
-                )
-                if license_id in expected_failures
-                else license_id
+            pytest.param(
+                license_id,
+                marks=make_marks(license_id),
             )
             for license_id in all_ids
         ],
@@ -88,4 +172,7 @@ class TestAllLicenses:
         assert isinstance(license_matcher, LicenseMatcher)
 
         license_matcher.match(license_result)
-        # assert result is not None, f"Failed to match {license_id} license text against XML matcher"
+
+        remaining_text = license_result.text.strip()
+        if len(remaining_text):
+            raise NotPerfectMatchError(f"Remaining: {remaining_text}")
