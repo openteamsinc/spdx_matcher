@@ -13,6 +13,11 @@
       <titleText>
          <p><alt name="title" match="(The )?ISC License( \(ISC[L]?\))?:?">ISC License</alt></p>
       </titleText>
+      <optional>
+          This license is approved by the OSI and FSF as GPL-compatible.
+          http://opensource.org/licenses/isc-license.txt
+      </optional>
+
       <copyrightText>
          <p>&lt;copyright notice&gt;</p>
       </copyrightText>
