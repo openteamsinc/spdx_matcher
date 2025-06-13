@@ -21,11 +21,13 @@
             <item>
                 <bullet>1.</bullet>
                Redistributions of <alt match="source code|works" name="code">source code</alt> must retain the <alt match="above|original" name="above">above</alt> copyright notice, this list of conditions
+               <optional>,</optional>
                  and the following disclaimer.
             </item>
             <item>
                 <bullet>2.</bullet>
                 Redistributions in binary form must reproduce the <alt match="above|original" name="above2">above</alt> copyright notice, this list of conditions
+                <optional>,</optional>
                  and the following disclaimer in the documentation and/or other materials provided with the
                  distribution.
             </item>
