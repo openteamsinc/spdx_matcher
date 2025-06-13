@@ -77,9 +77,17 @@ class ListMatcher(Matcher):
 class TitleMatcher(Matcher):
 
     def match(self, result: LicenseResult, optional: bool) -> bool:
-        if len(self.parts) == 1 and isinstance(self.parts[0], str):
-            return result.match_and_consume_line(self.parts[0], optional=True)
-        return super().match(result, optional)
+        # if len(self.parts) == 1 and isinstance(self.parts[0], str):
+        #     result.match_and_consume_line(self.parts[0], optional=True)
+        #     return True
+        super().match(result, optional=True)
+        return True
+
+    def to_dict(self) -> Any:
+        return {
+            "kind": "title",
+            "parts": [to_dict(part) for part in self.parts if not is_empty(part)],
+        }
 
 
 @dataclass
