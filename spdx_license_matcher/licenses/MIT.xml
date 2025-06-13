@@ -7,7 +7,13 @@
       </crossRefs>
       <text>
          <titleText>
-            <p>MIT License</p>
+            <p>
+               <optional>(</optional>
+               <optional>the</optional>
+               MIT License
+               <optional>(mit)</optional>
+               <optional>)</optional>
+            </p>
          </titleText>
          <copyrightText>
             <p>Copyright (c) &lt;year&gt; &lt;copyright holders&gt;
