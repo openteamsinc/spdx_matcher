@@ -48,6 +48,9 @@ class LicenseResult:
     def trim_remaining(self):
         self.rewind()
         self.text = self.text.strip()
+
+        # Remove 'all rights reserved' this can come anywhere after a copyright
+        self.text = self.text.replace("all rights reserved", "")
         # if text only contains non letter characters
         if not re.search(r"[a-zA-Z]", self.text):
             log.debug("Text only contains non-letter characters, setting to empty string.")

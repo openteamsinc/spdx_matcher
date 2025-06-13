@@ -109,7 +109,7 @@ class XMLToRegexTransformer:
                 parts.append(normalize(child.tail.strip()))
 
         copyright = RegexMatcher(
-            regex=r"^(\s*([#-\*•]))?\s*(copyright|\(c\)|portions copyright|\S+ is copyright|this \S+ is copyright).*",
+            regex=r"^(\s*([#\-\*•]))?\s*(copyright|\(c\)|portions copyright|\S+ is copyright|this \S+ is copyright).*",
             xpath=make_xpath(element),
             flags=re.IGNORECASE | re.MULTILINE,
         )
