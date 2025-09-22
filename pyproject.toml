@@ -11,7 +11,7 @@ requires-python = ">=3.8"
 license = "MIT"
 authors = [{ name = "Sean Ross-Ross" }]
 classifiers = ["Intended Audience :: Developers"]
-dependencies = ["lxml~=5.4.0", "click~=8.2.1"]
+dependencies = ["lxml>=5.4,<6.1", "click>=8.2.1,<8.2.0"]
 
 [project.optional-dependencies]
 dev = [
